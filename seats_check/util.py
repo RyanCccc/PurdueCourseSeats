@@ -89,6 +89,38 @@ def get_all(crn, term):
     curr_num = get_current_seats(parser) 
     return max_num, curr_num, sec_name, sec_code, sec_num
 
+def get_all_crns_by_class(sub, cnbr, term='CURRENT'):
+    url = "https://selfservice.mypurdue.purdue.edu/prod/bzwsrch.p_search_schedule?term=%s&cnbr=%s&subject=%s" % (term, cnbr, sub)
+    classes = []
+    try:
+        resp = urllib2.urlopen(url)
+        data = resp.read()
+        ps = BS(data)
+        all_table = ps.find_all('th')
+        total = len(all_table)
+        for i in xrange(0, total, 8):
+            current_table = all_table[i]
+            content = current_table.a.text
+            content = content.split(' - ')
+            cl = dict(
+                name = content[0],
+                crn = content[1],
+                code = content[2],
+                number = content[3]
+            )
+            classes.append(cl)
+    except:
+        raise ParserException('Cannot parse this class')
+    return classes
+
+def convert_classname(in_str):
+    in_str = in_str.replace(' ','')
+    r = re.compile("([a-zA-Z]+)([0-9]+)")
+    m = r.match(in_str)
+    sub = m.group(1).upper()
+    cnbr = m.group(2)
+    return sub, cnbr
+
 def convert_term_to_code(term_str):
     term_str = term_str.replace(' ','')
     if term_str.lower().strip() == 'current':

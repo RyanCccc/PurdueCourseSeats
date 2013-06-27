@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Purdue Course Seats</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    hello
+    <form name="register" action="." method="POST">{% csrf_token %}
+        <div> {{ error }} </div>
+        User Name: <input type="text" name="username"><br>
+        Password: <input type="password" name="password"><br>
+        Retype Password: <input type="password" name="repassword"><br>
+        Email: <input type="text" name="email"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

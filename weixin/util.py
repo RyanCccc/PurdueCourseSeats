@@ -15,7 +15,7 @@ def parse_xml(in_str):
     fromusername = root.find('ToUserName').text
     createtime = root.find('CreateTime').text
     term = ''
-    if not check_mode(in_str):
+    if not check_mode(content):
         print 'In the crn mode!!'
         crn = ''
         if len(content) <= 5:

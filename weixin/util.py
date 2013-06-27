@@ -39,14 +39,16 @@ def parse_xml(in_str):
     else:
         result = content.split(' ')
         sub, cnbr = convert_classname(result[0])
+        sub = sub.upper()
+        if len(cnbr) < 5:
+            cnbr += '00'
         if len(result) < 2:
             term = 'fall2013'
         else:
             term = result[2]    
         term_code = convert_term_to_code(term)
         searches = get_all_crns_by_class(sub, cnbr, term_code)
-        print searches
-        msg = '课的名称: %s 有以下这些CRN' % searches[0].get('name').encode('iso-8859-2')
+        msg = '课的名称: %s 有以下这些CRN: \n' % searches[0].get('name').encode('iso-8859-2')
         for cl in searches:
             msg += 'CRN: %s , and Sec num: %s ;\n' % (
                     cl.get('crn').encode('iso-8859-2'),

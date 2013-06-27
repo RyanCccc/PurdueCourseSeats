@@ -23,7 +23,14 @@ def parse_xml(in_str):
     try:
         max_num, curr_num, name, code, number = get_all(crn, term_code)
         rem_num = int(max_num) - int(curr_num)
-        msg = '您订阅的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d' % (name, code, number, crn, int(max_num), int(rem_num))
+        msg = '您订阅的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d' % (
+                name.encode('iso-8859-2'), 
+                code.encode('iso-8859-2'),
+                number.encode('iso-8859-2'), 
+                crn.encode('iso-8859-2'), 
+                int(max_num), 
+                int(rem_num)
+                )
     except:
         msg = "Sorry, the CRN %s is not available for term %s" % (crn, term)
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)

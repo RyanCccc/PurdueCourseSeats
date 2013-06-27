@@ -16,7 +16,6 @@ def parse_xml(in_str):
     createtime = root.find('CreateTime').text
     term = ''
     if not check_mode(content):
-        print 'In the crn mode!!'
         crn = ''
         if len(content) <= 5:
             crn = content.strip()
@@ -55,7 +54,6 @@ def parse_xml(in_str):
                     cl.get('crn').encode('iso-8859-2'),
                     cl.get('number').encode('iso-8859-2')
                     )
-    print 'msg is: ' + msg
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          

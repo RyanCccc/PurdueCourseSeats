@@ -38,8 +38,7 @@ def update_periodic():
         sec.current_seats_num = curr_num
         sec.remain_seats_num = rem_num
         sec.save()
-        msg = '您订阅的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d' %
-        (name, code, number, sec.crn, max_num, rem_num)
+        msg = '您订阅的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d' % (name, code, number, sec.crn, max_num, rem_num)
         if seats_change > 0:
             msg = 'Wow!!! 您的课号 %d 有新的位置啦！赶紧去抢下吧！！\n' % sec.crn + msg 
         elif seats_change < 0:

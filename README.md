@@ -3,6 +3,14 @@ PurdueCourseSeats
 =================
 
 
+Important Notice
+=================
+
+**From 06/28/2013, this server shut down the auto update backend due to the high cost, which means all classes in database will no be updated on time anymore**
+
+**Need money!!!!**
+
+
 Introduction
 -------------
 
@@ -37,7 +45,7 @@ Feature
   * Class(no space, eg. CS180, or cs180) + ' '(space) + Term
 - weChat will autoreply the number of seats if CRN provided, and the class information(name, code, etc.) if class number provided.
 - Default term is `Fall 2013` if no term provided, however, you can specify the term. 
-- Notice: This server has smart recognition feature for term, you can use format for term, for example:
+- Notice: This server has smart recognition feature for term, you can use any format for term, for example:
   * `su 2012` / `su2012` / `12su` => `Summer 2012`
   * `fa2011` / `11 fa` / `fa11` => `Fall 2011`
 

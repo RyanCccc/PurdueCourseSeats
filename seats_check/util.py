@@ -165,7 +165,7 @@ def convert_term_to_code(term_str):
 
 def convert_code_to_term(code):
     year = int(code[:4])
-    sem = int(code[5:])
+    sem = int(code[4:])
     dic = {
         'Summer' : 30,
         'Spring' : 20,

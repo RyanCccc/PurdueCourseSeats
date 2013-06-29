@@ -7,6 +7,7 @@ import urllib2
 import re
 
 from PCS import settings
+from class_time import Time_Interval, Class_Time
 
 class ParserException(Exception):
     pass
@@ -96,6 +97,8 @@ def get_all_crns_by_class(sub, cnbr, term='CURRENT'):
         resp = urllib2.urlopen(url)
         data = resp.read()
         ps = BS(data)
+        
+        # Get class name, crn, code, number
         all_table = ps.find_all('th')
         total = len(all_table)
         for i in xrange(0, total, 8):
@@ -109,6 +112,19 @@ def get_all_crns_by_class(sub, cnbr, term='CURRENT'):
                 number = content[3]
             )
             classes.append(cl)
+
+        # Get class time, type
+        all_table = ps.select('.datadisplaytable')
+        count = 0 
+        for i in range(1,len(all_table)-1):
+            table = all_table[i]
+            info_table = table.select('tr')[1]
+            time_raw = info_table.select('td')[1]
+            class_time = Time_Interval(time_raw)
+            type_ = info_table.select('td'[5])
+            classes[count]['class_time'] = class_time
+            classes[count]['class_type'] = type_
+            count++
     except:
         raise ParserException('Cannot parse this class')
     return classes

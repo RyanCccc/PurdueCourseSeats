@@ -16,6 +16,11 @@ def seats_check(request, class_crn, term = settings.CURRENT_TERM):
     except:
         exists = False
 
+    ######################
+    # Stop backend service
+    exists = False
+    ######################
+    
     if not exists: 
         try:
             max_num, curr_num, name, code, number = get_all(class_crn, term)

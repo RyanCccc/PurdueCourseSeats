@@ -24,8 +24,8 @@ DATABASES = {
 }
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -113,13 +113,14 @@ ROOT_URLCONF = 'PCS.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'PCS.wsgi.application'
 
-import os.path
-PROJECT_DIR = os.path.dirname(__file__)
+from os import path
+PCS_DIR = path.abspath(path.dirname(__file__))
+PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_DIR, "templates"),
+    path.abspath(path.join(PROJECT_DIR, "templates")),
 )
 
 INSTALLED_APPS = (

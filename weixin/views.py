@@ -17,7 +17,7 @@ def index(request):
             return HttpResponse(echostr, content_type = 'text/plain')
         else:
             return HttpResponse('error', content_type = 'text/plain')
-    else:
+    elif request.method == 'POST':
         resp = parse_xml(request.body)
         return HttpResponse(resp)
 

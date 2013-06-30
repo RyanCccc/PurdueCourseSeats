@@ -93,24 +93,24 @@ def change_color(in_str, color='#FF1CAE', need=1):
 
 def gen_header(cur_time):
     msg = ''
-    msg += change_color('=' * 18, color = '#6B238E', 0) + '\n' 
+    msg += change_color('=' * 18, '#6B238E', 0) + '\n' 
     msg += '  ' + change_color('Class Time', 0) + '  \n'
     msg += '%s\n' % (
         change_color(str(cur_time).encode('iso-8859-2'), 0)
     )
-    msg += change_color('=' * 18, color = '#6B238E', 0) + '\n'
+    msg += change_color('=' * 18, '#6B238E', 0) + '\n'
     msg += ' ' + change_color('CRN', '#5C3317', 0) + '  | ' + change_color('SEC', \
     '#5C3317', 0) + ' | ' +change_color('Type', '#5C3317', 0) + '\n'
     return msg
 
 def gen_header_with_color(cur_time):
     msg = ''
-    msg += change_color('=' * 18, color = '#6B238E') + '\n' 
+    msg += change_color('=' * 18, '#6B238E') + '\n' 
     msg += '  ' + change_color('Class Time') + '  \n'
     msg += '%s\n' % (
         change_color(str(cur_time).encode('iso-8859-2'))
     )
-    msg += change_color('=' * 18, color = '#6B238E') + '\n'
+    msg += change_color('=' * 18, '#6B238E') + '\n'
     msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
     '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
     return msg

@@ -75,9 +75,8 @@ def parse_xml(in_str):
                     cl.get('number').encode('iso-8859-2'),
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
-    print msg
     if not client.sendTextMsg(test_id, msg):
-        logging.info('msg failed to send')
+        print 'msg failed to send'
         client = Client(USER, PWD)
         client.sendTextMsg(test_id, msg)
 

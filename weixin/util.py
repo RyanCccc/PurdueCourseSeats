@@ -14,10 +14,6 @@ test_str = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDAT
 
 
 def parse_xml(in_str):
-    USER = 'chenrd769@gmail.com'
-    PWD = 'abc123'
-    test_id = '174921655'
-    client = Client(USER, PWD)
     root = ET.fromstring(in_str) 
     msg = ''
     content =  root.find('Content').text
@@ -75,10 +71,6 @@ def parse_xml(in_str):
                     cl.get('number').encode('iso-8859-2'),
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
-    if not client.sendTextMsg(test_id, msg):
-        print 'msg failed to send'
-        client = Client(USER, PWD)
-        client.sendTextMsg(test_id, msg)
     msg = '=' * len(msg)
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str

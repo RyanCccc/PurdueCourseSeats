@@ -91,7 +91,8 @@ def parse_xml(in_str):
                         cl.get('class_type').encode('iso-8859-2')[:3]
                         )
         if len(msg) > 2000:
-            msg = '对不起，您的返回结果超过2000字，目前无法返回'
+            msg = msg[:2000] + '\n'
+            msg += '对不起，您的返回结果超过2000字，目前无法返回'
 
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
@@ -114,14 +115,14 @@ def change_color(in_str, color='#FF1CAE', need=1):
 
 def gen_header(cur_time):
     msg = ''
-    msg += change_color('=' * 18, '#6B238E', 0) + '\n' 
-    msg += '  ' + change_color('Class Time', 0) + '  \n'
+    msg += '=' * 18 + '\n' 
+    msg += '  ' + 'Class Time' + '  \n'
     msg += '%s\n' % (
-        change_color(str(cur_time).encode('iso-8859-2'), 0)
+        str(cur_time).encode('iso-8859-2')
     )
-    msg += change_color('=' * 18, '#6B238E', 0) + '\n'
-    msg += ' ' + change_color('CRN', '#5C3317', 0) + '  | ' + change_color('SEC', \
-    '#5C3317', 0) + ' | ' +change_color('Type', '#5C3317', 0) + '\n'
+    msg += '=' * 18 + '\n'
+    msg += ' ' + 'CRN' + '  | ' + 'SEC' \
+     + ' | ' + '\n'
     return msg
 
 def gen_header_with_color(cur_time):

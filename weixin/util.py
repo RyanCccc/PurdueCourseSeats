@@ -3,11 +3,21 @@ import xml.etree.ElementTree as ET
 import re
 
 from seats_check.util import *
+from lib.weChat.client import Client
+
+USER = 'chenrd769@gmail.com'
+PWD = 'abc123'
+test_id = '174921655'
 
 test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS18000]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[10001]]></Content><MsgId>1234567890123456</MsgId></xml>"
 
+
 def parse_xml(in_str):
+    USER = 'chenrd769@gmail.com'
+    PWD = 'abc123'
+    test_id = '174921655'
+    client = Client(USER, PWD)
     root = ET.fromstring(in_str) 
     msg = ''
     content =  root.find('Content').text
@@ -54,25 +64,11 @@ def parse_xml(in_str):
         )
         
         cur_time = searches[0].get('class_time')
-        msg += change_color('=' * 18, color = '#6B238E') + '\n' 
-        msg += '  ' + change_color('Class Time') + '  \n'
-        msg += '%s\n' % (
-            change_color(str(cur_time).encode('iso-8859-2'))
-        )
-        msg += change_color('=' * 18, color = '#6B238E') + '\n'
-        msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
-        '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
+        msg += gen_header(cur_time)
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
-                msg += change_color('=' * 18, color = '#6B238E') + '\n' 
-                msg += '  ' + change_color('Class Time') + '  \n'
-                msg += '%s\n' % (
-                    change_color(str(cur_time).encode('iso-8859-2'))
-                )
-                msg += change_color('=' * 18, color = '#6B238E') + '\n'
-                msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
-                '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
+                msg += gen_header(cur_time)
              
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
@@ -80,6 +76,11 @@ def parse_xml(in_str):
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
     print msg
+    if not client.sendTextMsg(test_id, msg):
+        logging.info('msg failed to send')
+        client = Client(USER, PWD)
+        client.sendTextMsg(test_id, msg)
+
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          
@@ -98,4 +99,12 @@ def change_color(in_str, color='#FF1CAE'):
 
 def gen_header(cur_time):
     msg = ''
+    msg += change_color('=' * 18, color = '#6B238E') + '\n' 
+    msg += '  ' + change_color('Class Time') + '  \n'
+    msg += '%s\n' % (
+        change_color(str(cur_time).encode('iso-8859-2'))
+    )
+    msg += change_color('=' * 18, color = '#6B238E') + '\n'
+    msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
+    '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
     return msg

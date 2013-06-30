@@ -49,14 +49,30 @@ def parse_xml(in_str):
         term_code = convert_term_to_code(term)
         searches = get_all_secs_by_class(sub, cnbr, term_code)
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
-        msg = '课的名称: %s 有以下这些CRN: \n' % searches[0].get('name').encode('iso-8859-2')
+        msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
+            change_color(searches[0].get('name').encode('iso-8859-2'), '#6B4226')
+        )
         
         cur_time = searches[0].get('class_time')
-        msg += gen_header(cur_time)
+        msg += change_color('=' * 18, color = '#6B238E') + '\n' 
+        msg += '  ' + change_color('Class Time') + '  \n'
+        msg += '%s\n' % (
+            change_color(str(cur_time).encode('iso-8859-2'))
+        )
+        msg += change_color('=' * 18, color = '#6B238E') + '\n'
+        msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
+        '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
-                msg += gen_header(cur_time)
+                msg += change_color('=' * 18, color = '#6B238E') + '\n' 
+                msg += '  ' + change_color('Class Time') + '  \n'
+                msg += '%s\n' % (
+                    change_color(str(cur_time).encode('iso-8859-2'))
+                )
+                msg += change_color('=' * 18, color = '#6B238E') + '\n'
+                msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
+                '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
              
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
@@ -82,12 +98,4 @@ def change_color(in_str, color='#FF1CAE'):
 
 def gen_header(cur_time):
     msg = ''
-    msg += change_color('=' * 18, color = '#6B238E') + '\n' 
-    msg += '  ' + change_color('Class Time') + '  \n'
-    msg += '%s\n' % (
-        change_color(str(cur_time).encode('iso-8859-2'))
-    )
-    msg += change_color('=' * 18, color = '#6B238E') + '\n'
-    msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
-    '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
     return msg

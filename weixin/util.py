@@ -60,18 +60,18 @@ def parse_xml(in_str):
         )
         
         cur_time = searches[0].get('class_time')
-        msg += gen_header(cur_time)
+        msg += gen_header_with_color(cur_time)
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
-                msg += gen_header(cur_time)
+                msg += gen_header_with_color(cur_time)
              
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
                     cl.get('number').encode('iso-8859-2'),
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
-    msg = '=' * len(msg)
+    print len(msg)
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          
@@ -85,10 +85,25 @@ def check_mode(in_str):
     else:
         return 1
 
-def change_color(in_str, color='#FF1CAE'):
-    return '<a color=%s>%s</a>' % (color, in_str)
+def change_color(in_str, color='#FF1CAE', need=1):
+    if need:
+        return '<a color=%s>%s</a>' % (color, in_str)
+    else:
+        return in_str
 
 def gen_header(cur_time):
+    msg = ''
+    msg += change_color('=' * 18, color = '#6B238E', 0) + '\n' 
+    msg += '  ' + change_color('Class Time', 0) + '  \n'
+    msg += '%s\n' % (
+        change_color(str(cur_time).encode('iso-8859-2'), 0)
+    )
+    msg += change_color('=' * 18, color = '#6B238E', 0) + '\n'
+    msg += ' ' + change_color('CRN', '#5C3317', 0) + '  | ' + change_color('SEC', \
+    '#5C3317', 0) + ' | ' +change_color('Type', '#5C3317', 0) + '\n'
+    return msg
+
+def gen_header_with_color(cur_time):
     msg = ''
     msg += change_color('=' * 18, color = '#6B238E') + '\n' 
     msg += '  ' + change_color('Class Time') + '  \n'

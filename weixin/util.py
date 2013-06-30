@@ -79,7 +79,7 @@ def parse_xml(in_str):
         print 'msg failed to send'
         client = Client(USER, PWD)
         client.sendTextMsg(test_id, msg)
-
+    msg = '=' * len(msg)
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          

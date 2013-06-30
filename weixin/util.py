@@ -131,5 +131,5 @@ def gen_header_with_color(cur_time):
         change_color(str(cur_time).encode('iso-8859-2'))
     )
     msg += change_color('=' * 18, '#6B238E') + '\n'
-    msg += ' CRN  | SEC | Type \n'
+    msg += change_color(' CRN  | SEC | Type', '#5C3317') + '\n'
     return msg

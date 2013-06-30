@@ -116,13 +116,12 @@ def change_color(in_str, color='#FF1CAE', need=1):
 def gen_header(cur_time):
     msg = ''
     msg += '=' * 18 + '\n' 
-    msg += '  ' + 'Class Time' + '  \n'
+    msg += '  ' + 'Class Time' + '\n'
     msg += '%s\n' % (
         str(cur_time).encode('iso-8859-2')
     )
     msg += '=' * 18 + '\n'
-    msg += ' ' + 'CRN' + '  | ' + 'SEC' \
-     + ' | ' + '\n'
+    msg += ' CRN  | SEC | Type \n'
     return msg
 
 def gen_header_with_color(cur_time):
@@ -133,6 +132,5 @@ def gen_header_with_color(cur_time):
         change_color(str(cur_time).encode('iso-8859-2'))
     )
     msg += change_color('=' * 18, '#6B238E') + '\n'
-    msg += ' ' + change_color('CRN', '#5C3317') + '  | ' + change_color('SEC', \
-    '#5C3317') + ' | ' +change_color('Type', '#5C3317') + '\n'
+    msg += change_color(' CRN  | SEC | Type', '#5C3317') + '\n'
     return msg

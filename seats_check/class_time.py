@@ -24,8 +24,8 @@ class Time_Interval:
             self.end_time = Class_Time(end_raw)
         else:
             self.time_raw = time_raw
-            self.start_time = Class_Time('12:00 am')
-            self.end_time = Class_Time('12:30 am')
+            self.start_time = Class_Time('11:00 pm')
+            self.end_time = Class_Time('11:30 pm')
 
 class Class_Time(TM):
     def __new__(self, time_raw):

@@ -52,7 +52,9 @@ def parse_xml(in_str):
         msg = '课的名称: %s 有以下这些CRN: \n' % searches[0].get('name').encode('iso-8859-2')
         
         cur_time = searches[0].get('class_time')
-        msg += '=' * 18 + '\n' + 'Class Time %s\n' % str(cur_time).encode('iso-8859-2')
+        msg += change_color('=' * 18, color = '#8F8FBD') + '\n' + '    Class Time\n%s\n' % (
+            change_color(str(cur_time).encode('iso-8859-2'))
+        )
         msg += '=' * 18 + '\n CRN  | SEC | Type\n'
         for cl in searches:
             if cur_time != cl.get('class_time'):
@@ -81,3 +83,6 @@ def check_mode(in_str):
         return 0
     else:
         return 1
+
+def change_color(in_str, color='#FF0000'):
+    return '<a color=%s>%s</a>' % (color, in_str)

@@ -65,7 +65,7 @@ def parse_xml(in_str):
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
                     cl.get('number').encode('iso-8859-2'),
-                    cl.get('class_type').encode('iso-8859-2')
+                    cl.get('class_type').encode('iso-8859-2')[:3]
                     )
 
     print msg

@@ -52,25 +52,27 @@ def parse_xml(in_str):
         msg = '课的名称: %s 有以下这些CRN: \n' % searches[0].get('name').encode('iso-8859-2')
         
         cur_time = searches[0].get('class_time')
-        msg += change_color('=' * 18, color = '#8F8FBD') + '\n' + '    Class Time\n%s\n' % (
+        msg += change_color('=' * 18, color = '#6B238E') + '\n' + '    Class Time\n %s\n' % (
             change_color(str(cur_time).encode('iso-8859-2'))
         )
-        msg += '=' * 18 + '\n CRN  | SEC | Type\n'
+        msg += change_color('=' * 18, color = '#6B238E') + '\n'
+        msg += change_color(' CRN  ', '#5C3317') + '|' + change_color(' SEC ', \
+        '#5C3317') + '|' +change_color(' Type') + '\n'
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
-                msg += '=' * 18 + '\n' + 'Class Time %s\n' % (
-                    str(cur_time).encode('iso-8859-2')
+                msg += change_color('=' * 18, color = '#6B238E') + '\n' + '    Class Time\n %s\n' % (
+                    change_color(str(cur_time).encode('iso-8859-2'))
                 )
-                msg += '=' * 18 + '\n CRN  | SEC | Type\n'
+                msg += change_color('=' * 18, color = '#6B238E') + '\n'
+                msg += change_color(' CRN  ', '#5C3317') + '|' + change_color(' SEC ', \
+                '#5C3317') + '|' +change_color(' Type') + '\n'
              
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
                     cl.get('number').encode('iso-8859-2'),
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
-
-    print msg
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          

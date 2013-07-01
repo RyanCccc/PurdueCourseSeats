@@ -17,4 +17,6 @@ urlpatterns = patterns('seats_check.views',
         name = 'seats_check_seat_check'),
     url(r'^(?P<class_crn>\w+)/(?P<term>\w+)/$', 'seats_check', 
         name = 'seats_check_seat_check'),
+    url(r'^crns/$', 'seats_check', 
+        name = 'seats_check_seat_check'),
 )

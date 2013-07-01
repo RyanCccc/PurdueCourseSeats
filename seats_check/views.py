@@ -9,12 +9,13 @@ from seats_check.models import Section
 from PCS import settings
 
 @csrf_exempt
-def seats_check(request, class_crn = None, term = settings.CURRENT_TERM):
+def seats_check(request, class_crn = None):
     result = None
     exists = True
 
     #GET
     if request.method == 'GET':
+        term = request.GET.get('term') or settings.CURRENT_TERM
         try:
             sec = Section.objects.get(crn = class_crn, term = term) 
         except:

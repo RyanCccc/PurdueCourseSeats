@@ -51,7 +51,7 @@ def parse_xml(in_str):
         if len(result) < 2:
             term = 'fall2013'
         else:
-            term = result[2]    
+            term = result[1]    
         term_code = convert_term_to_code(term)
         searches = get_all_secs_by_class(sub, cnbr, term_code)
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
@@ -59,6 +59,8 @@ def parse_xml(in_str):
             change_color(searches[0].get('name').encode('iso-8859-2'), '#6B4226')
         )
         
+        if 'nocolor' in result:
+            gen_header_with_color = gen_header
         cur_time = searches[0].get('class_time')
         msg += gen_header_with_color(cur_time)
         for cl in searches:
@@ -116,7 +118,6 @@ def change_color(in_str, color='#FF1CAE', need=1):
 def gen_header(cur_time):
     msg = ''
     msg += '=' * 18 + '\n' 
-    msg += '  ' + 'Class Time' + '\n'
     msg += '%s\n' % (
         str(cur_time).encode('iso-8859-2')
     )

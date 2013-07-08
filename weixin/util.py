@@ -59,8 +59,6 @@ def parse_xml(in_str):
             change_color(searches[0].get('name').encode('iso-8859-2'), '#6B4226')
         )
         
-        if 'nocolor' in result:
-            gen_header_with_color = gen_header
         cur_time = searches[0].get('class_time')
         msg += gen_header_with_color(cur_time)
         for cl in searches:

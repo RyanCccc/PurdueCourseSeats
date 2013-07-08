@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from PCS import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -14,7 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^seats_check/', include('seats_check.urls')), 
-    url(r'^', include('user_mode.urls')), 
-    url(r'^weixin/', include('weixin.urls')), 
+    url(r'^', views.index, name='index'),
+    url(r'^seats_check/', include('seats_check.urls')),
+    url(r'^user/', include('user_mode.urls')),
+    url(r'^weixin/', include('weixin.urls')),
 )

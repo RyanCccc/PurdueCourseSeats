@@ -1,21 +1,22 @@
 from django.db import models
-
+from django.contrib.auth.models import User as Auth_User
 from seats_check.models import Section
 # Create your models here.
 
-class User(models.Model):
-    username = models.CharField(max_length=20)
-    password = models.CharField(max_length=100)
-    email = models.EmailField()
+
+class MyUserManager(models.Manager):
+    def create_user(self, username, email, password):
+        user = Auth_User.objects.create_user(username, email, password) 
+        my_user = self.create(
+            user = user,
+            pwd = password
+        )
+        return my_user
+
+class MyUser(models.Model):
+    user = models.OneToOneField(Auth_User, primary_key=True)
+    pwd = models.CharField(max_length=100)
     sections = models.ManyToManyField(Section)
-
-    def change_pwd(self, pwd):
-        self.password = pwd
-        self.save()
-
-    def change_email(self, email):
-        self.email = email
-        self.save()
 
     def add_section(self, crn, term):
         sec = None
@@ -27,6 +28,7 @@ class User(models.Model):
             if not sec in self.sections.all():
                 self.sections.add(sec)
         else:
+            err = sec
             raise sec
 
     def add_sections(self, **secs):
@@ -40,12 +42,7 @@ class User(models.Model):
                 if not sec in self.sections.all():
                     self.sections.add(sec)
             else:
-                raise sec
+                err = sec
+                raise err
 
-def authenticate(username, password):
-    user = None
-    try:
-        user = User.objects.get(username = username, password = password)
-    except:
-        pass
-    return user
+    objects = MyUserManager()

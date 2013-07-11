@@ -11,7 +11,6 @@ from seats_check.util import ParserException, convert_term_to_code
 
 def index(request):
     user = request.user
-    import pdb; pdb.set_trace()
     if request.method == 'GET':
         if not user.is_authenticated():
             return redirect('user_mode_login')

@@ -11,6 +11,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+import djcelery
+djcelery.setup_loader()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -137,7 +140,7 @@ INSTALLED_APPS = (
     'seats_check',
     'user_mode',
     'weixin',
-
+    'djcelery',
 )
 
 # A sample logging configuration. The only tangible logging

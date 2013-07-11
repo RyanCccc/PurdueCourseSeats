@@ -1,6 +1,7 @@
 from django.db import models
 
 from seats_check.util import get_all
+from seats_check.util import ParserException
 # Create your models here.
 class SectionManager(models.Manager):
     def create_section(self, crn, max_num, curr_num, term, name, code, number):

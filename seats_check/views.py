@@ -21,10 +21,7 @@ def seats_check(request, class_crn = None):
         except:
             exists = False
 
-        ######################
-        # Stop backend service
-        exists = False
-        ######################
+        exists = True
         
         if not exists: 
             try:

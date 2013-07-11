@@ -12,11 +12,6 @@ from django.conf import settings
 #from seats_check.models import Section
 #from seats_check import util
 
-
-REDIS_URL = environ.get('REDISTOGO_URL', 'redis://localhost')
-
-celery = Celery('tasks', broker=REDIS_URL)
-
 @periodic_task(run_every=timedelta(seconds=20))
 def update_periodic():
     if not settings.configured:

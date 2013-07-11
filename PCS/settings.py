@@ -14,6 +14,11 @@ MANAGERS = ADMINS
 import djcelery
 djcelery.setup_loader()
 
+BROKER_URL = 'redis://localhost:6379/0'
+
+# Let Celery workers import our tasks module
+CELERY_IMPORTS = ("tasks", )
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

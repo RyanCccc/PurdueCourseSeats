@@ -83,7 +83,7 @@ def register(request):
         else:
             my_user = MyUser.objects.create_user(username, email, password)
             user = my_user.user
-            authenticate(username, password)
+            user = authenticate(username=username, password=password)
             _login(request, user)
             respond = redirect('user_mode_index')
             return respond

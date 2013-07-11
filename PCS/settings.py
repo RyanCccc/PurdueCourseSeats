@@ -1,8 +1,4 @@
 # Django settings for PCS project.
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
 CURRENT_TERM = '201410'
 
 ADMINS = (

@@ -40,11 +40,23 @@ def seats_check(request, class_crn = None):
             except Exception as e:
                 result = json.dumps({'code' : 0, 'content': e.message})
         else:
-            result = json.dumps({
-                'code': 1,
-                'content': (sec.max_seats_num, sec.current_seats_num, sec.remain_seats_num),
-                })
-
+            max_num = sec.max_seats_num
+            curr_num = sec.current_seats_num
+            rem_num = sec.remain_seats_num
+            name = sec.name
+            code = sec.code
+            number = sec.number
+            result = json.dumps(
+                {'code': 1, 
+                    'content': {'max_num' : max_num, 
+                                'curr_num' : curr_num, 
+                                'rem_num' : rem_num,
+                                'name' : name,
+                                'code' : code,
+                                'number' : number,
+                               }
+                }
+            )
 
     # POST
     elif request.method == 'POST':

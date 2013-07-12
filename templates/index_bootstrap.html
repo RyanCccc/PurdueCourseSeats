@@ -1,8 +1,10 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <!-- saved from url=(0053)http://twitter.github.io/bootstrap/examples/hero.html -->
 <html lang="en"><head _wxhkphogpkobbkjccgfifhfjlahnoocnan_="shake_1.0"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Purdue Course Seats</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -28,7 +30,7 @@
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
                                    <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
-  <style type="text/css"></style><script type="text/javascript">var vglnk = {api_url: '//api.viglink.com/api', key:'3aa861e8f1563b938853cd0d4f89c8e0'};</script><script type="text/javascript" async="" src="../assets/js/vglnk.js"></script></head>
+  <style type="text/css"></style><script type="text/javascript">var vglnk = {api_url: '//api.viglink.com/api', key:'3aa861e8f1563b938853cd0d4f89c8e0'};</script><script type="text/javascript" async="" src="{% static "js/vglnk.js" %}"></script></head>
 
   <body>
 
@@ -40,27 +42,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="http://twitter.github.io/bootstrap/examples/hero.html#">Project name</a>
+          <a class="brand" href="{% url 'home' %}">PCS</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="http://twitter.github.io/bootstrap/examples/hero.html#">Home</a></li>
-              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">About</a></li>
-              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#contact">Contact</a></li>
+              <li class="active"><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">Dashboard</a></li>
+              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">SeatsCheck</a></li>
               <li class="dropdown">
-                <a href="http://twitter.github.io/bootstrap/examples/hero.html#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <a href= "#" class="dropdown-toggle" data-toggle="dropdown">MultiPlatform<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#">Action</a></li>
-                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#">Another action</a></li>
-                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#">Separated link</a></li>
-                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#">One more separated link</a></li>
+                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">weChat</a></li>
+                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">Mobile</a></li>
+                  <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">Download</a></li>
                 </ul>
               </li>
+              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#about">About</a></li>
+              <li><a href="http://twitter.github.io/bootstrap/examples/hero.html#contact">Contact</a></li>
             </ul>
             <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="text" placeholder="User name">
               <input class="span2" type="password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>
             </form>
@@ -73,8 +73,9 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <h1>Welcome to Purdue Course Seats!</h1>
+        <p>This website parser purdue class seats remaining from Purdue Official website and keep tracking available class seats in real time!!</p>
+        <p>Update the latest seats in <b>every 20 seconds!</b></p>
         <p><a href="http://twitter.github.io/bootstrap/examples/hero.html#" class="btn btn-primary btn-large">Learn more »</a></p>
       </div>
 
@@ -108,20 +109,18 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap-transition.js" %}"></script>
+    <script src="{% static "js/bootstrap-alert.js" %}"></script>
+    <script src="{% static "js/bootstrap-modal.js" %}"></script>
+    <script src="{% static "js/bootstrap-dropdown.js" %}"></script>
+    <script src="{% static "js/bootstrap-scrollspy.js" %}"></script>
+    <script src="{% static "js/bootstrap-tab.js" %}"></script>
+    <script src="{% static "js/bootstrap-tooltip.js" %}"></script>
+    <script src="{% static "js/bootstrap-popover.js" %}"></script>
+    <script src="{% static "js/bootstrap-button.js" %}"></script>
+    <script src="{% static "js/bootstrap-collapse.js" %}"></script>
+    <script src="{% static "js/bootstrap-carousel.js" %}"></script>
+    <script src="{% static "js/bootstrap-typeahead.js" %}"></script>
 
-  
-
-<script type="text/javascript">var vglnk = {api_url: '//api.viglink.com/api', key:'0dff9ade2d1125af6c910069b6d6e155'};</script><script type="text/javascript" async="" src="../assets/js/vglnk.js"></script></body></html>
+<script type="text/javascript">var vglnk = {api_url: '//api.viglink.com/api', key:'0dff9ade2d1125af6c910069b6d6e155'};</script><script type="text/javascript" async="" src="{% static "js/vglnk.js" %}"></script></body></html>

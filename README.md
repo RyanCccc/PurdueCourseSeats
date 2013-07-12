@@ -6,7 +6,7 @@ PurdueCourseSeats
 Important Notice
 =================
 
-** Null **
+**Null**
 
 
 Introduction
@@ -49,7 +49,7 @@ WeChat Support
 API
 -----
 
-** URL: `http://purdue-class.chenrendong.com/seats_check/` **
+*URL: `http://purdue-class.chenrendong.com/seats_check/`*
 - `POST` to API URL with following format:
   * `[{term:term},{content:[*crns]}]`
   * Example: `[{term:201410},{content:[10001,10002,10003]}]`

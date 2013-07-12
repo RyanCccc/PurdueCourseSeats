@@ -1,3 +1,7 @@
+from os import path
+PCS_DIR = path.abspath(path.dirname(__file__))
+PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
+
 # Django settings for PCS project.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -74,7 +78,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = path.join(PROJECT_DIR, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -120,9 +124,6 @@ ROOT_URLCONF = 'PCS.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'PCS.wsgi.application'
 
-from os import path
-PCS_DIR = path.abspath(path.dirname(__file__))
-PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block active_dashboard %}class="active"{% endblock %}
+
+{% block content %}
+<table border="1">
+    <tr>
+        <th>CRN</th>
+        <th>Max Seats</th>
+        <th>Actived Seats</th>
+        <th>Remain Seats</th>
+    </tr>
+    {% for sec in sections %}
+    <tr>
+        <td>{{ sec.crn }}</td>
+        <td>{{ sec.max_seats_num }}</td>
+        <td>{{ sec.current_seats_num }}</td>
+        <td>{{ sec.remain_seats_num }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br><br>
+<form name="addsec" action="." method="POST">{% csrf_token %}
+    <div>{{ error }}</div>
+    Add CRN: <input type="text" name="crn" placeholder="Section CRN"><br>
+    Term: <input type="text" name="term" placeholder="Current (Optional)"><br>
+    <input type="submit" value="Submit">
+</form>
+<form action="{% url 'user_mode_logout' %}" method="GET">
+    <input type="submit" value="Logout">
+</form> 
+{% endblock %}

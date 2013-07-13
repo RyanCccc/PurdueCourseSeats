@@ -12,7 +12,7 @@ from seats_check.util import ParserException, convert_term_to_code
 # Create your views here.
 
 @login_required
-def index(request):
+def dashboard(request):
     user = request.user
     if request.method == 'GET':
         my_user = MyUser.objects.get(user=user)
@@ -21,7 +21,7 @@ def index(request):
             'email' : user.email,
             'sections' :  my_user.sections.all()
         }
-        return render(request, 'index.html', context)
+        return render(request, 'dashboard.html', context)
     elif request.method == 'POST':
         my_user = MyUser.objects.get(user=user)
         param = request.POST
@@ -40,8 +40,8 @@ def index(request):
             my_user.add_section(crn, term)
         except ParserException as e:
             context['error'] = e.message
-            return render(request, 'index.html', context) 
-        return render(request, 'index.html', context)
+            return render(request, 'dashboard.html', context) 
+        return render(request, 'dashboard.html', context)
 
 def login(request):
     if request.method == 'GET':
@@ -54,7 +54,7 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             _login(request, user)
-            respond = redirect('user_mode_index')
+            respond = redirect('user_mode_dashboard')
         else:
             return render(
                         request,'login.html', 
@@ -83,7 +83,7 @@ def register(request):
             user = my_user.user
             user = authenticate(username=username, password=password)
             _login(request, user)
-            respond = redirect('user_mode_index')
+            respond = redirect('user_mode_dashboard')
             return respond
     else:
         return render(request,'rmy_egister.html', {'error':''})

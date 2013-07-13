@@ -19,6 +19,6 @@ urlpatterns = patterns('user_mode.views',
         name = 'user_mode_logout'),
     url(r'^register/$', 'register', 
         name = 'user_mode_register'),
-    url(r'^$', 'index', 
-        name = 'user_mode_index'),
+    url(r'^dashboard/$', 'dashboard', 
+        name = 'user_mode_dashboard'),
 )

@@ -18,6 +18,7 @@
       }
     </style>
     <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -73,27 +74,63 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Welcome to Purdue Course Seats!</h1>
-        <p>This website parser purdue class seats remaining from Purdue Official website and keep tracking available class seats in real time!!</p>
-        <p>Update the latest seats in <b>every 20 seconds!</b></p>
+        <h1 class="welcome">Welcome to Purdue Course Seats!</h1>
+        <div class="row-fluid">
+            <div class="dec-pic span4"></div>
+            <div class="description span6">
+                <p>PCS parsers purdue class seats from Purdue Official Website</p>
+                <p>Keep tracking available class seats in real time</p>
+                <p>Update the latest seats in <b>every 20 seconds</b></p>
+            </div>
+        </div>
         <p><a href="http://twitter.github.io/bootstrap/examples/hero.html#" class="btn btn-primary btn-large">Learn more »</a></p>
       </div>
 
+      <div class="accordion-group banner">
+          <div class="accordion-heading">
+              <div class="accordion-toggle" data-toggle="collapse" href="#banner-data">
+                  <h3>
+                    View the most powerful feature:
+                    <b>Auto Registration</b>
+                  </h3>
+              </div>
+          </div>
+          <div id="banner-data" class="accordion-body collapse">
+              <div class="accordion-inner">
+                  <h2>Auto Registration</h2>
+                    <li>Communicate with MyPurdue System</li>
+                    <li>Complete course registration automatically.</li>
+                    <li>Register your desired courses at first time when new seats released</li>
+                  </ul>
+                  <p><a class="btn" href="http://twitter.github.io/bootstrap/examples/hero.html#">View details »</a></p>
+              </div>
+          </div>
+      </div>
       <!-- Example row of columns -->
       <div class="row">
         <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="http://twitter.github.io/bootstrap/examples/hero.html#">View details »</a></p>
+          <h2>Instant Email</h2>
+          <ul>
+            <li>Email you the latest seats available condition.</li>
+            <li>Notify you when seats releasing instantly.</li>
+          </ul>
+          <p><a class="btn" href="http://twitter.github.io/bootstrap/examples/hero.html#">Register my email now »</a></p>
         </div>
         <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <h2>WeChat Public</h2>
+          <ul>
+            <li>Auto-reply the latest information</li>
+            <li>Check all courses' CRN instantly</li>
+          </ul>
           <p><a class="btn" href="http://twitter.github.io/bootstrap/examples/hero.html#">View details »</a></p>
        </div>
         <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <h2>Mobile Applications</h2>
+          <ul>
+            <li>Multi-Platform including iOS, Android and Win8</li>
+            <li>Communicate with server and update data.</li>
+            <li>Get notification when new seats released</li>
+          </ul>
           <p><a class="btn" href="http://twitter.github.io/bootstrap/examples/hero.html#">View details »</a></p>
         </div>
       </div>
@@ -101,7 +138,7 @@
       <hr>
 
       <footer>
-        <p>© Company 2013</p>
+        <p>© Rendong Chen 2013</p>
       </footer>
 
     </div> <!-- /container -->

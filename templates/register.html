@@ -1,19 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% extends "base.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Purdue Course Seats</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-</head>
-<body>
-    hello
-    <form name="register" action="." method="POST">{% csrf_token %}
-        <div> {{ error }} </div>
-        username: <input type="text" name="username"><br>
-        Email: <input type="text" name="email"><br>
-        Password: <input type="password" name="password"><br>
-        Retype Password: <input type="password" name="repassword"><br>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% block content %}
+<form name="register" action="." method="POST">{% csrf_token %}
+    <div> {{ error }} </div>
+    username: <input type="text" name="username"><br>
+    firstname: <input type="text" name="firstname"><br>
+    lastname: <input type="text" name="lastname"><br>
+    Email: <input type="text" name="email"><br>
+    Password: <input type="password" name="password"><br>
+    Retype Password: <input type="password" name="repassword"><br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

@@ -5,8 +5,14 @@ from seats_check.models import Section
 
 
 class MyUserManager(models.Manager):
-    def create_user(self, username, email, password):
-        user = Auth_User.objects.create_user(username, email, password) 
+    def create_user(self, username, email, password, firstname, lastname):
+        user = Auth_User.objects.create_user(
+                username, 
+                email,
+                password,
+                first_name = firstname,
+                last_name = lastname
+                )
         my_user = self.create(
             user = user,
             pwd = password

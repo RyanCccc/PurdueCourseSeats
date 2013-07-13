@@ -72,6 +72,8 @@ def register(request):
     elif request.method == 'POST':
         param = request.POST
         username = param.get('username')
+        firstname = param.get('firstname')
+        lastname= param.get('lastname')
         email = param.get('email')
         password = param.get('password')
         if User.objects.filter(username = username).exists():
@@ -79,7 +81,13 @@ def register(request):
         elif User.objects.filter(email = email).exists():
             return render(request,'register.html', {'error':'Email Exists'})
         else:
-            my_user = MyUser.objects.create_user(username, email, password)
+            my_user = MyUser.objects.create_user(
+                    username,
+                    email,
+                    password,
+                    firstname,
+                    lastname
+                    )
             user = my_user.user
             user = authenticate(username=username, password=password)
             _login(request, user)

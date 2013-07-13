@@ -30,5 +30,8 @@
         Term: <input type="text" name="term" placeholder="Current (Optional)"><br>
         <input type="submit" value="Submit">
     </form>
+    <form action="{% url 'user_mode_logout' %}" method="GET">
+        <input type="submit" value="Logout">
+    </form> 
 </body>
 </html>

@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='home'),
     url(r'^seats_check/', include('seats_check.urls')),
-    url(r'^user/', include('user_mode.urls')),
+    url(r'^accounts/', include('user_mode.urls')),
     url(r'^weixin/', include('weixin.urls')),
+    url(r'^not_completed$', views.not_completed, name='not_completed'),
 )

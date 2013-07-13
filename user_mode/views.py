@@ -94,4 +94,4 @@ def register(request):
             respond = redirect('user_mode_dashboard')
             return respond
     else:
-        return render(request,'rmy_egister.html', {'error':''})
+        return render(request,'register.html', {'error':''})

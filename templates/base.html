@@ -62,7 +62,7 @@
               <li {% block active_contact%}{% endblock %}><a href="{% url 'not_completed' %}">Contact</a></li>
             </ul>
 
-            {% if not user %}
+            {% if not request.user.is_authenticated %}
                 <form action="{% url 'user_mode_login' %}" method="POST" class="navbar-form pull-right">
                 {% csrf_token %}
                   <input class="span2" name="username" type="text" placeholder="User name">
@@ -72,7 +72,7 @@
             {% else %}
             <ul class="nav pull-right">
                 <li class="dropdown">
-                    <a href= "#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ user.get_full_name }}<b class="caret"></b></a>
+                    <a href= "#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ request.user.get_full_name }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'not_completed' %}">Profile</a></li>
                         <li><a href="{% url 'user_mode_logout' %}">Log Out</a></li>

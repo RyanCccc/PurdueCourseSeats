@@ -7,6 +7,10 @@ from celery.task import periodic_task
 from datetime import timedelta
 from os import environ
 
+if not settings.configured:
+    os.environ["DJANGO_SETTINGS_MODULE"] = "PCS.settings"
+from seats_check.models import Section
+from seats_check import util
 from django.conf import settings
 
 #from seats_check.models import Section
@@ -14,10 +18,6 @@ from django.conf import settings
 
 @periodic_task(run_every=timedelta(seconds=20))
 def update_periodic():
-    if not settings.configured:
-        os.environ["DJANGO_SETTINGS_MODULE"] = "PCS.settings"
-    from seats_check.models import Section
-    from seats_check import util
     secs = Section.objects.all()
     for sec in secs:
         max_num, curr_num, name, code, number = util.get_all(sec.crn, sec.term)

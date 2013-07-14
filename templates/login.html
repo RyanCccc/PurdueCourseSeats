@@ -3,7 +3,7 @@
 {% block content %}
 <form name="register" action="." method="POST">{% csrf_token %}
     <div> {{ error }} </div>
-    username: <input type="text" name="username"><br>
+    User Name: <input type="text" name="username"><br>
     Password: <input type="password" name="password"><br>
     <input type="submit" value="Submit">
 </form>

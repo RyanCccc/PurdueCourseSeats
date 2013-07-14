@@ -2,7 +2,7 @@
 import xml.etree.ElementTree as ET
 import re
 
-from seats_check.util import *
+from seats_check.util import * 
 from lib.weChat.client import Client
 
 test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS18000]]></Content><MsgId>1234567890123456</MsgId></xml>"
@@ -49,19 +49,25 @@ def parse_xml(in_str):
         else:
             term = result[1]    
         term_code = convert_term_to_code(term)
-        searches = get_all_secs_by_class(sub, cnbr, term_code)
+        try:
+            searches = get_all_secs_by_class(sub, cnbr, term_code)
+        except ParserException as e:
+            if 'Timeout' in e.message:
+                msg = 'The content is too large to handle'
+                re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
+                return re_str
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
         msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
             searches[0].get('name').encode('iso-8859-2')
         )
-        
+
         cur_time = searches[0].get('class_time')
         msg += gen_header(cur_time)
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
                 msg += gen_header(cur_time)
-             
+
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),
                     cl.get('number').encode('iso-8859-2'),

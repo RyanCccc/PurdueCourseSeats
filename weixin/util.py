@@ -50,7 +50,7 @@ def parse_xml(in_str):
             term = result[1]    
         term_code = convert_term_to_code(term)
         try:
-            searches = get_all_secs_by_class(sub, cnbr, term_code)
+            searches = get_all_secs_by_class(sub, cnbr, term_code, 3)
         except ParserException as e:
             if 'timed' in e.message:
                 msg = 'The content is too large to handle'

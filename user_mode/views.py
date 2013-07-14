@@ -10,7 +10,12 @@ from django.core.exceptions import ValidationError
 
 from user_mode.models import MyUser
 from PCS import settings
-from seats_check.util import ParserException, convert_term_to_code
+from seats_check.util import (
+    ParserException,
+    convert_term_to_code,
+    convert_classname,
+    get_all_secs_by_class
+)
 from seats_check.models import Section
 from decorators import guest_required
 from tasks import send_email
@@ -34,7 +39,7 @@ def dashboard(request):
         crn = param.get('crn')
         term = param.get('term')
         if not term:
-            term = settings.CURRENT_TERM 
+            term = settings.CURRENT_TERM
         else:
             term = convert_term_to_code(term)
         context = {
@@ -45,7 +50,10 @@ def dashboard(request):
         try:
             sec = my_user.add_section(crn, term)
             msg = "You successfully subscribe section:%s \n" % sec
-            send_email.delay([my_user.user.email,], msg)
+            try:
+                send_email.delay([my_user.user.email,], msg)
+            except ImportError as e: 
+                send_email([my_user.user.email,], msg)
         except ParserException as e:
             context['error'] = e.message
             return render(request, 'dashboard.html', context) 
@@ -117,6 +125,32 @@ def register(request):
     else:
         return render(request,'register.html', {'error':''})
 
+def crn_search(request):
+    if request.method == 'GET':
+        context = None
+    if request.method == 'POST':
+        class_name = request.POST.get('classname')
+        term = request.POST.get('term')
+        if not term:
+            term = settings.CURRENT_TERM 
+        else:
+            term = convert_term_to_code(term)
+        if class_name:
+            try:
+                sub, cnbr = convert_classname(class_name)
+                classes = get_all_secs_by_class(sub, cnbr, term)
+            except ParserException as e:
+                context = {'error': e.message}
+                return render(request, 'crn_search.html', context)
+            classes = sorted(classes, key = lambda cl: cl['class_time'].start_time)
+            context = {
+                'classes': classes,
+                'error': ''
+            }
+        else:
+            context = {'error': 'Please use right class name'}
+    return render(request, 'crn_search.html', context)
+
 def remove_crn(request):
     crn = request.POST.get('crn')
     sec = Section.objects.get(crn=crn)
@@ -124,3 +158,7 @@ def remove_crn(request):
     myuser = user.myuser
     myuser.sections.remove(sec)
     return redirect('user_mode_dashboard')
+
+def profile(request):
+    context = None
+    return render(request, 'profile.html', context)

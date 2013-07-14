@@ -1,0 +1,43 @@
+{% extends "dashboard_base.html" %}
+{% load staticfiles %}
+
+{% block active_search %}active{% endblock %}
+
+{% block tab_title %}CRN Search{% endblock %}
+
+{% block main_table %}
+<legend>
+    Class Name: {{ classes.0.name }} 
+</legend>
+<table>
+    <tr>
+        <th>Class Code</th>
+        <th>Section Number</th>
+        <th>Section CRN</th>
+        <th>Section Time</th>
+        <th>Section Type</th>
+    </tr>
+    {% for cl in classes %}
+    <tr>
+        <td>{{ cl.code }}</td>
+        <td>{{ cl.number }}</td>
+        <td>{{ cl.crn }}</td>
+        <td>{{ cl.class_time }}</td>
+        <td>{{ cl.class_type }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block search_label %}Class{% endblock %}
+{% block search_name %}classname{% endblock %}
+
+{% block submit_label %}Search{% endblock %}
+{% block form %}
+<form id="add_sec" class="form-inline" name="addsec" action="." method="POST">{% csrf_token %}
+    <div>{{ error }}</div>
+    <label>Class</label><input class="input-small" type="text" name="classname" placeholder="eg. CS180">
+    <label>Term: </label><input class="input-small" type="text" name="term" value="Fall 2013">
+    <input class="btn" type="submit" value="Search">
+</form>
+{% endblock %}

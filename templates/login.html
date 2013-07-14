@@ -1,14 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<legend>Log in</legend>
-<form name="register" action="." method="POST">{% csrf_token %}
-    <div> {{ error }} </div>
-    User Name: <input type="text" name="username"><br>
-    Password: <input type="password" name="password"><br>
-    <input type="submit" value="Submit">
-</form>
-<form action={% url 'user_mode_register' %} method="GET">
-    <input type="submit" value="Register">
-</form>
+<div class="unit">
+    <legend><h1>Log in</h1></legend>
+    <form class="form-horizontal" name="register" action="." method="POST">{% csrf_token %}
+        {% if error %}
+            <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+        <div class="control-group">
+            <label class="control-label" for="inputUsername">
+                User Name: 
+            </label>
+            <div class="controls">
+                <input id="inputUsername" type="text" name="username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">
+                Password:
+            </label>
+            <div class="controls">
+                <input id="inputPassword" type="password" name="password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input class='btn' type="submit" value="Login">
+                <form action={% url 'user_mode_register' %} method="GET">
+                    <input class="btn" type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

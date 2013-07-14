@@ -1,0 +1,27 @@
+html, body {
+    height:100%; 
+    background:#4E5359 url(../images/bg_universal.png) repeat 0 0;
+    color:#666; 
+}
+
+table td {
+    text-align: center;
+}
+
+.pull-center {
+    text-align: center;
+}
+
+.important {
+   color: #0000FF; 
+}
+
+.unit {
+   color: rgb(102, 102, 102); 
+   border-bottom-left-radius: 6px;
+   border-bottom-right-radius: 6px;
+   border-top-left-radius: 6px;
+   border-top-right-radius: 6px;
+   background-color: #eee;
+   padding: 20px 20px 30px 20px;
+}

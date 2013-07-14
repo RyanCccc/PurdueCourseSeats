@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block active_dashboard %}class="active"{% endblock %}
+
+{% block content %}
+<div class="unit">
+    <div class="navbar inner-navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="{% url 'user_mode_dashboard' %}">Dashboard</a>
+            <ul class="nav">
+                <li class="{% block active_sub %}{% endblock %}"><a href="{% url 'user_mode_dashboard' %}">Subscribe Sections</a></li>
+                <li class="{% block active_search %}{% endblock %}"><a href="{% url 'user_mode_crn_search' %}">CRN Search</a></li>
+                <li class="{% block active_pro %}{% endblock %}"><a href="{% url 'user_mode_profile'%}">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <legend><h1 class="pull-center">
+            {% block tab_title %}{% endblock %}
+    </h1></legend>
+    {% block main_table %}
+    {% endblock %}
+    <br><br>
+    {% block form %}
+    {% endblock %}
+    {% block alert %}
+    {% endblock %}
+</div>
+
+{% endblock %}
+

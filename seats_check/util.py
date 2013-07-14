@@ -90,14 +90,17 @@ def get_all(crn, term):
     curr_num = get_current_seats(parser) 
     return max_num, curr_num, sec_name, sec_code, sec_num
 
-def get_all_secs_by_class(sub, cnbr, term='CURRENT'):
+def get_all_secs_by_class(sub, cnbr, term='CURRENT', timeout=None):
     url = "https://selfservice.mypurdue.purdue.edu/prod/bzwsrch.p_search_schedule?term=%s&cnbr=%s&subject=%s" % (term, cnbr, sub)
     classes = []
     try:
-        resp = urllib2.urlopen(url, timeout=3)
+        if timeout:
+            resp = urllib2.urlopen(url, timeout)
+        else:
+            resp = urllib2.urlopen(url)
         data = resp.read()
         ps = BS(data)
-        
+
         # Get class name, crn, code, number
         all_table = ps.find_all('th')
         total = len(all_table)
@@ -133,8 +136,13 @@ def convert_classname(in_str):
     in_str = in_str.replace(' ','')
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     m = r.match(in_str)
-    sub = m.group(1).upper()
-    cnbr = m.group(2)
+    try:
+        sub = m.group(1).upper()
+        cnbr = m.group(2)
+    except AttributeError as e:
+        raise ParserException('Incorrect class name format')
+    if len(cnbr) < 5:
+        cnbr += '00'
     return sub, cnbr
 
 def convert_term_to_code(term_str):

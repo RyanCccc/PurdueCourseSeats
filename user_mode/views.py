@@ -5,6 +5,8 @@ from django.contrib.auth import logout as _logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from user_mode.models import MyUser
 from PCS import settings
@@ -80,6 +82,17 @@ def register(request):
         lastname= param.get('lastname')
         email = param.get('email')
         password = param.get('password')
+        repassword = param.get('repassword')
+        if not username or not firstname or not lastname: 
+            return render(request,'register.html', {'error':'Please fill out all required fields'})
+        if not email:
+            return render(request,'register.html', {'error':'Please fill out address'})
+        if repassword != password:
+            return render(request,'register.html', {'error':'Password not same'})
+        try:
+            validate_email(email)
+        except ValidationError:
+            return render(request,'register.html', {'error':'Please use correct email'})
         if User.objects.filter(username = username).exists():
             return render(request,'register.html', {'error':'Username Exists'})
         elif User.objects.filter(email = email).exists():

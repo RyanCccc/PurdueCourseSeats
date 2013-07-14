@@ -71,7 +71,7 @@ def parse_xml(in_str):
             msg = ''
 
             msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
-                change_color(searches[0].get('name').encode('iso-8859-2'), '#6B4226')
+                searches[0].get('name').encode('iso-8859-2')
             )
             
             cur_time = searches[0].get('class_time')

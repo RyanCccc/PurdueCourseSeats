@@ -94,7 +94,7 @@ def get_all_secs_by_class(sub, cnbr, term='CURRENT'):
     url = "https://selfservice.mypurdue.purdue.edu/prod/bzwsrch.p_search_schedule?term=%s&cnbr=%s&subject=%s" % (term, cnbr, sub)
     classes = []
     try:
-        resp = urllib2.urlopen(url, timeout=4.0)
+        resp = urllib2.urlopen(url, timeout=3)
         data = resp.read()
         ps = BS(data)
         
@@ -125,10 +125,8 @@ def get_all_secs_by_class(sub, cnbr, term='CURRENT'):
             classes[count]['class_time'] = class_time
             classes[count]['class_type'] = type_
             count += 1
-    except urllib2.URLError as e:
-        raise ParserException('Timeout')
-    except:
-        raise ParserException('Cannot parse this class')
+    except Exception as e:
+        raise ParserException(e.message)
     return classes
 
 def convert_classname(in_str):

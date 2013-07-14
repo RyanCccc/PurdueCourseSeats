@@ -52,7 +52,7 @@ def parse_xml(in_str):
         try:
             searches = get_all_secs_by_class(sub, cnbr, term_code)
         except ParserException as e:
-            if 'Timeout' in e.message:
+            if 'timed' in e.message:
                 msg = 'The content is too large to handle'
                 re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
                 return re_str

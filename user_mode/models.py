@@ -33,11 +33,14 @@ class MyUser(models.Model):
         if not isinstance(sec, Exception):
             if not sec in self.sections.all():
                 self.sections.add(sec)
+                return sec
         else:
             err = sec
             raise sec
+        return None
 
     def add_sections(self, **secs):
+        result = []
         for crn, term in secs.iteritems():
             sec = None
             try:
@@ -47,8 +50,10 @@ class MyUser(models.Model):
             if not isinstance(sec, Exception):
                 if not sec in self.sections.all():
                     self.sections.add(sec)
+                    result.append(sec)
             else:
                 err = sec
                 raise err
+        return result
 
     objects = MyUserManager()

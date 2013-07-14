@@ -12,6 +12,7 @@ from user_mode.models import MyUser
 from PCS import settings
 from seats_check.util import ParserException, convert_term_to_code
 from decorators import guest_required
+from tasks import send_email
 
 # Create your views here.
 
@@ -41,7 +42,9 @@ def dashboard(request):
             'error' : '',
         }
         try:
-            my_user.add_section(crn, term)
+            sec = my_user.add_section(crn, term)
+            msg = "You successfully subscribe section:\n%s" % sec
+            send_email(list(my_user.user.email), msg)
         except ParserException as e:
             context['error'] = e.message
             return render(request, 'dashboard.html', context) 

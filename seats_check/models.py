@@ -48,3 +48,24 @@ class Section(models.Model):
 
     def get_term(self):
         return convert_code_to_term(self.term)
+
+    def __str__(self):
+        description = 'Your section %s\n' % self.name
+        description += '(Class: %s; Section Number: %s; Term: %s)\n' % (
+            self.code,
+            self.number,
+            self.get_term()
+        )
+        description += 'CRN: %s\n' % self.crn
+        description += 'Has %s maximun seats ' % int(self.max_seats_num)
+        description += 'and there are %s seats left\n' % (
+            int(self.remain_seats_num)
+        )
+        return description
+
+    def __unicode__(self):
+        description = self.__str__()
+        return u'' + description
+
+    def __repr__(self):
+        return self.__str__()

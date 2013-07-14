@@ -43,8 +43,8 @@ def dashboard(request):
         }
         try:
             sec = my_user.add_section(crn, term)
-            msg = "You successfully subscribe section:\n%s" % sec
-            send_email(list(my_user.user.email), msg)
+            msg = "You successfully subscribe section:%s \n" % sec
+            send_email.delay([my_user.user.email,], msg)
         except ParserException as e:
             context['error'] = e.message
             return render(request, 'dashboard.html', context) 

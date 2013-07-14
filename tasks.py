@@ -7,9 +7,10 @@ from celery.task import periodic_task
 from datetime import timedelta
 from os import environ
 
+from django.core.mail import send_mail
+
 from seats_check.models import Section
 from seats_check import util
-from django.conf import settings
 
 @periodic_task(run_every=timedelta(seconds=20))
 def update_periodic():
@@ -28,3 +29,10 @@ def update_periodic():
         elif seats_change < 0:
             msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
         print msg
+        users = sec.myuser_set.all()
+        emails = [user.user.email for user in users]
+        send_email.delay(emails, msg)
+         
+@celery.task
+def send_email(emails, msg):
+    send_mail('Purdue Seats Report', msg, 'purdueseats@gmail.com', emails)

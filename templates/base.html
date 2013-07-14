@@ -65,7 +65,7 @@
             {% if not request.user.is_authenticated %}
                 <form action="{% url 'user_mode_login' %}" method="POST" class="navbar-form pull-right">
                 {% csrf_token %}
-                  <input class="span2" name="username" type="text" placeholder="User name">
+                  <input class="span2" name="username" type="text" placeholder="Username">
                   <input class="span2" name="password" type="password" placeholder="Password">
                   <button type="submit" class="btn">Sign in</button>
                 </form>

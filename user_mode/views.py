@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from user_mode.models import MyUser
 from PCS import settings
 from seats_check.util import ParserException, convert_term_to_code
+from decorators import guest_required
+
 # Create your views here.
 
 @login_required
@@ -43,6 +45,7 @@ def dashboard(request):
             return render(request, 'dashboard.html', context) 
         return render(request, 'dashboard.html', context)
 
+@guest_required
 def login(request):
     if request.method == 'GET':
         return render(request,'login.html', {'error':''})
@@ -66,6 +69,7 @@ def logout(request):
     _logout(request)
     return redirect('home')
 
+@guest_required
 def register(request):
     if request.method == 'GET':
         return render(request,'register.html', {'error':''})

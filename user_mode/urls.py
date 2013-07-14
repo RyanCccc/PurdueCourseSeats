@@ -21,4 +21,6 @@ urlpatterns = patterns('user_mode.views',
         name = 'user_mode_register'),
     url(r'^dashboard/$', 'dashboard', 
         name = 'user_mode_dashboard'),
+    url(r'^remove_crn/$', 'remove_crn', 
+        name = 'user_mode_remove_crn'),
 )

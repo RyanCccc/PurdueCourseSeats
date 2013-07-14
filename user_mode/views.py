@@ -11,6 +11,7 @@ from django.core.exceptions import ValidationError
 from user_mode.models import MyUser
 from PCS import settings
 from seats_check.util import ParserException, convert_term_to_code
+from seats_check.models import Section
 from decorators import guest_required
 from tasks import send_email
 
@@ -115,3 +116,11 @@ def register(request):
             return respond
     else:
         return render(request,'register.html', {'error':''})
+
+def remove_crn(request):
+    crn = request.POST.get('crn')
+    sec = Section.objects.get(crn=crn)
+    user = request.user
+    myuser = user.myuser
+    myuser.sections.remove(sec)
+    return redirect('user_mode_dashboard')

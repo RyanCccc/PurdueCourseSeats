@@ -14,6 +14,7 @@
         <th>Class Code</th>
         <th>Section Number</th>
         <th>Popularity</th>
+        <th>Remove</th>
     </tr>
     {% for sec in sections %}
     <tr>
@@ -25,7 +26,14 @@
         <td>{{ sec.get_term }}</td>
         <td>{{ sec.code }}</td>
         <td>{{ sec.number }}</td>
-        <td>{{ sec.myuser_set.count }}
+        <td>{{ sec.myuser_set.count }}</td>
+        <td>
+            <form action="{% url 'user_mode_remove_crn' %}" method="POST">
+                {% csrf_token %}
+                CRN: <input type="text" name="crn"><br>
+                <input type="submit" value="Remove">
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

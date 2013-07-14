@@ -49,11 +49,12 @@ def dashboard(request):
         }
         try:
             sec = my_user.add_section(crn, term)
-            msg = "You successfully subscribe section:%s \n" % sec
-            try:
-                send_email.delay([my_user.user.email,], msg)
-            except ImportError as e: 
-                send_email([my_user.user.email,], msg)
+            if sec:
+                msg = "You successfully subscribe section:%s \n" % sec
+                try:
+                    send_email.delay([my_user.user.email,], msg)
+                except ImportError as e: 
+                    send_email([my_user.user.email,], msg)
         except ParserException as e:
             context['error'] = e.message
             return render(request, 'dashboard.html', context) 

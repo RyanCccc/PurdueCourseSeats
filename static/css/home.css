@@ -9,9 +9,16 @@ h1.welcome {
 }
 
 .dec-pic {
-    height: 80px;
-    background-color: #FFF;
     float: left;
+}
+
+#demo1 {
+    width: auto;
+    height: 300px;
+    background: url(../images/demo1.PNG);
+    background-repeat:no-repeat;
+    background-position: 0px -50px;
+    background-size: 401px 350px;
 }
 
 .description {

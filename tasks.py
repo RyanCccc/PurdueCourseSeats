@@ -7,14 +7,9 @@ from celery.task import periodic_task
 from datetime import timedelta
 from os import environ
 
-if not settings.configured:
-    os.environ["DJANGO_SETTINGS_MODULE"] = "PCS.settings"
 from seats_check.models import Section
 from seats_check import util
 from django.conf import settings
-
-#from seats_check.models import Section
-#from seats_check import util
 
 @periodic_task(run_every=timedelta(seconds=20))
 def update_periodic():

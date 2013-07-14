@@ -19,6 +19,7 @@ def index(request):
             return HttpResponse('error', content_type = 'text/plain')
     elif request.method == 'POST':
         resp = parse_xml(request.body)
+        resp *= 2
         return HttpResponse(resp)
 
 def _checkSig(param):

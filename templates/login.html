@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<legend>Log in</legend>
 <form name="register" action="." method="POST">{% csrf_token %}
     <div> {{ error }} </div>
     User Name: <input type="text" name="username"><br>

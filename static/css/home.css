@@ -21,6 +21,14 @@ h1.welcome {
     background-size: 401px 350px;
 }
 
+#demo2 {
+    width: auto;
+    height: 300px;
+    background: url(../images/demo2.png);
+    background-repeat:no-repeat;
+    background-size: 401px 300px;
+}
+
 .description {
     text-align: right; 
 }

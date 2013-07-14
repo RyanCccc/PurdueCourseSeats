@@ -26,13 +26,13 @@ def update_periodic():
         sec.save()
         msg = 'Your subscribed class %s, class code is %s, class number is %s, section number is %s, maximun seats %s, there are %s seats left' % (name, code, number, sec.crn, max_num, rem_num)
         if seats_change > 0:
+            users = sec.myuser_set.all()
+            emails = [user.user.email for user in users]
+            send_email.delay(emails, msg)
             msg = 'Wow! your class %s has new seats released!!\n' % sec.crn + msg
         elif seats_change < 0:
             msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
         print msg
-        users = sec.myuser_set.all()
-        emails = [user.user.email for user in users]
-        send_email.delay(emails, msg)
          
 @task
 def send_email(emails, msg):

@@ -73,8 +73,8 @@ def parse_xml(in_str):
                     cl.get('number').encode('iso-8859-2'),
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
-        if len(msg) > 3000:
-            msg = msg[:2900] + '\n'
+        if len(msg) > 2000:
+            msg = msg[:1900] + '\n'
             msg += '对不起，您的返回结果超过2000字，目前无法返回'
 
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)

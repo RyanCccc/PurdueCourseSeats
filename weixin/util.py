@@ -52,7 +52,7 @@ def parse_xml(in_str):
         searches = get_all_secs_by_class(sub, cnbr, term_code)
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
         msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
-            change_color(searches[0].get('name').encode('iso-8859-2'), '#6B4226')
+            searches[0].get('name').encode('iso-8859-2')
         )
         
         cur_time = searches[0].get('class_time')
@@ -68,34 +68,12 @@ def parse_xml(in_str):
                     cl.get('class_type').encode('iso-8859-2')[:3]
                     )
         if len(msg) > 2000:
-            msg = ''
-
-            msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
-                searches[0].get('name').encode('iso-8859-2')
-            )
-            
-            cur_time = searches[0].get('class_time')
-            msg += gen_header(cur_time)
-            for cl in searches:
-                if cur_time != cl.get('class_time'):
-                    cur_time = cl.get('class_time')
-                    msg += gen_header(cur_time)
-                 
-                msg += '%s | %s | %s\n' % (
-                        cl.get('crn').encode('iso-8859-2'),
-                        cl.get('number').encode('iso-8859-2'),
-                        cl.get('class_type').encode('iso-8859-2')[:3]
-                        )
-        if len(msg) > 2000:
-            msg = msg[:2000] + '\n'
+            msg = msg[:1900] + '\n'
             msg += '对不起，您的返回结果超过2000字，目前无法返回'
 
     re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
     return re_str
          
-        
-
-
 def check_mode(in_str):
     r = re.compile('^\d{5}')
     if r.match(in_str):

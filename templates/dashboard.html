@@ -13,6 +13,7 @@
         <th>Class Term</th>
         <th>Class Code</th>
         <th>Section Number</th>
+        <th>Popularity</th>
     </tr>
     {% for sec in sections %}
     <tr>
@@ -24,10 +25,12 @@
         <td>{{ sec.get_term }}</td>
         <td>{{ sec.code }}</td>
         <td>{{ sec.number }}</td>
+        <td>{{ sec.myuser_set.count }}
     </tr>
     {% endfor %}
 </table>
 <br><br><br>
+<p>Once there are seats released, server will send a notify email to <b>{{ request.user.email }}</b> instantly!</p> 
 <form name="addsec" action="." method="POST">{% csrf_token %}
     <div>{{ error }}</div>
     Add CRN: <input type="text" name="crn" placeholder="Section CRN"><br>

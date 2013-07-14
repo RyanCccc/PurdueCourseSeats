@@ -3,6 +3,7 @@ import logging
 
 import os
 from celery import Celery
+from celery import task
 from celery.task import periodic_task
 from datetime import timedelta
 from os import environ
@@ -33,6 +34,6 @@ def update_periodic():
         emails = [user.user.email for user in users]
         send_email.delay(emails, msg)
          
-@celery.task
+@task
 def send_email(emails, msg):
     send_mail('Purdue Seats Report', msg, 'purdueseats@gmail.com', emails)

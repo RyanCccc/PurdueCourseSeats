@@ -5,10 +5,6 @@ import re
 from seats_check.util import *
 from lib.weChat.client import Client
 
-USER = 'chenrd769@gmail.com'
-PWD = 'abc123'
-test_id = '174921655'
-
 test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS18000]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[10001]]></Content><MsgId>1234567890123456</MsgId></xml>"
 
@@ -60,11 +56,11 @@ def parse_xml(in_str):
         )
         
         cur_time = searches[0].get('class_time')
-        msg += gen_header_with_color(cur_time)
+        msg += gen_header(cur_time)
         for cl in searches:
             if cur_time != cl.get('class_time'):
                 cur_time = cl.get('class_time')
-                msg += gen_header_with_color(cur_time)
+                msg += gen_header(cur_time)
              
             msg += '%s | %s | %s\n' % (
                     cl.get('crn').encode('iso-8859-2'),

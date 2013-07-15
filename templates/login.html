@@ -26,11 +26,11 @@
         <div class="control-group">
             <div class="controls">
                 <input class='btn' type="submit" value="Login">
-                <form action={% url 'user_mode_register' %} method="GET">
-                    <input class="btn" type="submit" value="Register">
-                </form>
             </div>
         </div>
+    </form>
+    <form action={% url 'user_mode_register' %} method="GET">
+        <input class="btn" type="submit" value="Register">
     </form>
 </div>
 {% endblock %}

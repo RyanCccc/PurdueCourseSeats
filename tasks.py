@@ -17,7 +17,7 @@ from seats_check import util
 def update_periodic():
     secs = Section.objects.all()
     count = len(secs)
-    for i in range(0, count, 20)
+    for i in range(0, count, 20):
         process_secs = secs[i:i+20]
         update_secs.delay(process_secs)
 

@@ -39,7 +39,6 @@ def update_secs(secs):
             msg = 'Wow! your class %s has new seats released!!\n' % sec.crn + msg
         elif seats_change < 0:
             msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
-        print msg
 
 @task
 def send_email(emails, msg):

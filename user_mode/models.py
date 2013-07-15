@@ -26,7 +26,7 @@ class MyUser(models.Model):
     sections = models.ManyToManyField(Section)
 
     def add_section(self, crn, term):
-        if self.sections.count < 5:
+        if self.sections.count() < 5:
             sec = None
             try:
                 sec = Section.objects.get(crn = crn, term = term)

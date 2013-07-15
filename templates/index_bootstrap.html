@@ -55,12 +55,18 @@
               <div class="description span6">
                   <p>PCS parsers purdue class seats from Purdue Official Website</p>
                   <p>Keep tracking available class seats in real time</p>
-                  <p>Update the latest seats in <b>every 20 seconds</b></p>
+                  <p>Update the latest seats in <b>every 60 seconds</b></p>
                   {% if not request.user.is_authenticated %}
                     <p><a href="{% url 'user_mode_register' %}" class="btn btn-primary btn-large">Sign up »</a></p>
                   {% else %}
                     <p><a href="{% url 'user_mode_dashboard' %}" class="btn btn-primary btn-large">My Dashboard »</a></p>
                   {% endif %}
+                  <div class="alert alert-block" style="text-align:left">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <h2>Notice!</h2>
+                      <p>From 7/15, every user can only subscribe 5 sections.</p>
+                      <p>The seats will be checked every 60 seconds due to the limitation of my server.</p>
+                  </div>
               </div>
           </div>
       </div>

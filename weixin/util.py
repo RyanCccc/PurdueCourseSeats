@@ -5,7 +5,7 @@ import re
 from seats_check.util import * 
 from lib.weChat.client import Client
 
-test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS18000]]></Content><MsgId>1234567890123456</MsgId></xml>"
+test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS180]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[10001]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str_2 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[engl106]]></Content><MsgId>1234567890123456</MsgId></xml>"
 
@@ -48,15 +48,15 @@ def parse_xml(in_str):
         if len(result) < 2:
             term = 'fall2013'
         else:
-            term = result[1]    
+            term = result[1]
         term_code = convert_term_to_code(term)
         try:
             searches = get_all_secs_by_class(sub, cnbr, term_code, 3.2)
         except ParserException as e:
             if 'timed' in e.message:
-                msg = 'The content is too large to handle'
-                re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
-                return re_str
+                msg = 'The content is too large to display!'
+            re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
+            return re_str
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
         msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
             searches[0].get('name').encode('iso-8859-2')

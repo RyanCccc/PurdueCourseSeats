@@ -47,9 +47,15 @@ def update_secs(secs):
                       str(rem_num - seats_change),
                       str(rem_num)
                     )
+<<<<<<< HEAD
             #users = sec.myuser_set.all()
             #emails = [user.user.email for user in users]
             #send_email.delay(emails, msg)
+=======
+            users = sec.myuser_set.all()
+            emails = [user.user.email for user in users]
+            send_email.delay(emails, msg)
+>>>>>>> d3f7491698355126aef433b42507e553dd93d99d
 
 
 @task

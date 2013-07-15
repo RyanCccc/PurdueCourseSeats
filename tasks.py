@@ -13,12 +13,12 @@ from django.core.mail import send_mail
 from seats_check.models import Section
 from seats_check import util
 
-@periodic_task(run_every=timedelta(seconds=20))
+@periodic_task(run_every=timedelta(seconds=60))
 def update_periodic():
     secs = Section.objects.all()
     count = len(secs)
-    for i in range(0, count, 30):
-        process_secs = secs[i:i+30]
+    for i in range(0, count, 20):
+        process_secs = secs[i:i+20]
         update_secs.delay(process_secs)
 
 @task

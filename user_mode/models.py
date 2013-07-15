@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User as Auth_User
 from seats_check.models import Section
+from seats_check.util import ParserException
 # Create your models here.
 
 
@@ -25,19 +26,22 @@ class MyUser(models.Model):
     sections = models.ManyToManyField(Section)
 
     def add_section(self, crn, term):
-        sec = None
-        try:
-            sec = Section.objects.get(crn = crn, term = term)
-        except:
-            sec = Section.objects.create_new_section(crn, term)
-        if not isinstance(sec, Exception):
-            if not sec in self.sections.all():
-                self.sections.add(sec)
-                return sec
+        if self.sections.count < 5:
+            sec = None
+            try:
+                sec = Section.objects.get(crn = crn, term = term)
+            except:
+                sec = Section.objects.create_new_section(crn, term)
+            if not isinstance(sec, Exception):
+                if not sec in self.sections.all():
+                    self.sections.add(sec)
+                    return sec
+            else:
+                err = sec
+                raise sec
+            return None
         else:
-            err = sec
-            raise sec
-        return None
+            raise ParserException('You cannot subscribe more than 5 sections')
 
     def add_sections(self, **secs):
         result = []

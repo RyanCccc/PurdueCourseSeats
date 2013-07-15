@@ -16,6 +16,13 @@ from seats_check import util
 @periodic_task(run_every=timedelta(seconds=20))
 def update_periodic():
     secs = Section.objects.all()
+    count = len(secs)
+    for i in range(0, count, 20)
+        process_secs = secs[i:i+20]
+        update_secs.delay(process_secs)
+
+@task
+def update_secs(secs):
     for sec in secs:
         max_num, curr_num, name, code, number = util.get_all(sec.crn, sec.term)
         rem_num = max_num - curr_num
@@ -33,7 +40,7 @@ def update_periodic():
         elif seats_change < 0:
             msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
         print msg
-         
+
 @task
 def send_email(emails, msg):
     send_mail('Purdue Seats Report', msg, 'purdueseats@gmail.com', emails)

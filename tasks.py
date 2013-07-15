@@ -43,6 +43,10 @@ def update_secs(secs):
             send_email.delay(emails, msg)
         elif seats_change < 0:
             msg = 'Sorry!!! You class\n %s \nSeats are decreasing!!\n' % sec.crn
+            msg += 'Remain seats change from %s to %s' % (
+                      str(rem_num - seats_change),
+                      str(rem_num)
+                    )
             users = sec.myuser_set.all()
             emails = [user.user.email for user in users]
             send_email.delay(emails, msg)

@@ -95,7 +95,7 @@ def get_all_secs_by_class(sub, cnbr, term='CURRENT', timeout=None):
     classes = []
     try:
         if timeout:
-            resp = urllib2.urlopen(url, timeout)
+            resp = urllib2.urlopen(url, timeout=timeout)
         else:
             resp = urllib2.urlopen(url)
         data = resp.read()

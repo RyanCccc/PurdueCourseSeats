@@ -26,9 +26,7 @@
         <div class="control-group">
             <div class="controls">
                 <input class='btn' type="submit" value="Login">
-                <form action={% url 'user_mode_register' %} method="GET">
-                    <input class="btn" type="submit" value="Register">
-                </form>
+                <a class='btn' href="{% url 'user_mode_register' %}">Register</a>
             </div>
         </div>
     </form>

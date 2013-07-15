@@ -49,13 +49,13 @@ def parse_xml(in_str):
         else:
             term = result[1]    
         term_code = convert_term_to_code(term)
+        searches = None
         try:
             searches = get_all_secs_by_class(sub, cnbr, term_code, timeout=3)
         except ParserException as e:
-            if 'timed' in e.message:
-                msg = 'The content is too large to handle'
-                re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
-                return re_str
+            msg = e.message
+            re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
+            return re_str
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
         msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
             searches[0].get('name').encode('iso-8859-2')

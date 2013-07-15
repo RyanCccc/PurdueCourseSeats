@@ -33,14 +33,22 @@ def update_secs(secs):
         sec.save()
         msg = 'Your subscribed class %s, class code is %s, class number is %s, section number is %s, maximun seats %s, there are %s seats left' % (name, code, number, sec.crn, max_num, rem_num)
         if seats_change > 0:
-            msg = 'Wow! your class %s has new seats released!!\n' % sec.crn + msg
+            msg = 'Wow! your class %s has new seats released!!\n Remain seats'
+                  'change from %s to %s' % (
+                      sec.crn, 
+                      str(rem_num - seats_change),
+                      str(rem_num)
+                      )
+            msg += "\n\nYour class: %s\n" + sec
             users = sec.myuser_set.all()
             emails = [user.user.email for user in users]
             send_email.delay(emails, msg)
-            for user in users:
-                user.sections.remove(sec)
         elif seats_change < 0:
-            msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
+            msg = 'Sorry!!! You class\n %s \nSeats are decreasing!!\n' % sec
+            users = sec.myuser_set.all()
+            emails = [user.user.email for user in users]
+            send_email.delay(emails, msg)
+
 
 @task
 def send_email(emails, msg):

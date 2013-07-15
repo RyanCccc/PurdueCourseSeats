@@ -37,6 +37,8 @@ def update_secs(secs):
             users = sec.myuser_set.all()
             emails = [user.user.email for user in users]
             send_email.delay(emails, msg)
+            for user in users:
+                user.sections.remove(sec)
         elif seats_change < 0:
             msg = 'Sorry!!! You class %s seats are decreasing!!\n' % sec.crn + msg
 

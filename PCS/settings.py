@@ -3,7 +3,11 @@ PCS_DIR = path.abspath(path.dirname(__file__))
 PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
 
 # Django settings for PCS project.
-DEBUG = True
+if '/srv/project' in PROJECT_DIR:
+    DEBUG = False
+else:
+    DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 CURRENT_TERM = '201410'
@@ -40,7 +44,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['purdue-class.chenrendong.com', ]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -192,3 +196,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'purdueseats@gmail.com'
 EMAIL_HOST_PASSWORD = 'purduecourse'
 EMAIL_PORT = 587
+
+
+FIXTURE_DIRS = (
+    path.join(PROJECT_DIR, 'fixtures'),
+)

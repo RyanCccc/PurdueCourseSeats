@@ -54,7 +54,8 @@ def dashboard(request):
                 try:
                     send_email.delay([my_user.user.email,], msg)
                 except ImportError as e: 
-                    send_email([my_user.user.email,], msg)
+                    pass
+                    #send_email([my_user.user.email,], msg)
         except ParserException as e:
             context['error'] = e.message
             return render(request, 'dashboard.html', context) 
@@ -67,7 +68,6 @@ def login(request):
     elif request.method == 'POST':
         param = request.POST
         username = param.get('username')
-        email = param.get('email')
         password = param.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
@@ -154,10 +154,14 @@ def crn_search(request):
 
 def remove_crn(request):
     crn = request.POST.get('crn')
+    # TODO
+    # Add term
     sec = Section.objects.get(crn=crn)
     user = request.user
     myuser = user.myuser
     myuser.sections.remove(sec)
+    if not sec.myuser_set.count():
+        Section.delete(sec)
     return redirect('user_mode_dashboard')
 
 def profile(request):

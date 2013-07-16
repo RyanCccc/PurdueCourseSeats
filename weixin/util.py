@@ -53,7 +53,7 @@ def parse_xml(in_str, timeout=None):
             if timeout:
                 searches = get_all_secs_by_class(sub, cnbr, term_code, timeout)
             else:
-                searches = get_all_secs_by_class(sub, cnbr, term_code, 3.2)
+                searches = get_all_secs_by_class(sub, cnbr, term_code, 3)
         except ParserException as e:
             msg = e.message
             if 'timed' in e.message:

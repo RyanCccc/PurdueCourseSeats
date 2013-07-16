@@ -2,6 +2,10 @@ table {
     width: 100%;
 }
 
+td, th {
+    text-align: center !important;
+}
+
 .inner-navbar {
     margin-bottom: 40px;
 }

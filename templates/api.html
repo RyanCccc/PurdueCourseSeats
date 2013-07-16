@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static "css/api.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block active_api %}class="active"{% endblock %}
+
+{% block content %}
+<div class="unit">
+    <legend><h1 class="pull-center">
+            API
+    </h1></legend>
+
+    <div>
+        <div class="alert alert-info">URL: http://purdue-class.chenrendong.com/seats_check/</div>
+        <ul>
+            <li>
+                <div class="info"><b>POST</b> to API URL with following format:</div>
+                <ul>
+                    <li>
+                        <div class="info">[{term:term},{content:[*crns]}]</div>
+                    </li>
+                    <li>
+                        <div class="info">Example: [{term:201410},{content:[10001,10002,10003]}]</div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="info">Server returns a list of results</div>
+            </li>
+            <li>
+                <div class="info">The result of a single class is always a **JSON** containing {code : 0/1 , content : String or Tuple}</div>
+                <ul>
+                    <li>
+                        <div class="info">code is the flag, 0 represents as failed, 1 represnts as successful</div>
+                    </li>
+                    <li>
+                        <div class="info">If code is 0, then content is a string containing the error message</div>
+                    </li>
+                    <li>
+                        <div class="info">If code is 1, then centent is a tuple containing all the class information</div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,6 @@
+import os
 from django.conf.urls import patterns, include, url
-from PCS import views
+from PCS import views, settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -20,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('user_mode.urls')),
     url(r'^weixin/', include('weixin.urls')),
     url(r'^not_completed$', views.not_completed, name='not_completed'),
+    url(r'^api/$', views.api, name='api'),
 )

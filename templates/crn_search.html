@@ -6,14 +6,16 @@
 {% block tab_title %}CRN Search{% endblock %}
 
 {% block main_table %}
-<legend>
+<legend class="pull-center">
     <h3>
-    Class Name: {{ classes.0.name }} 
+        {{ classes.0.code }}
+    </h3>
+    <h3>
+        {{ classes.0.name }}
     </h3>
 </legend>
-<table>
+<table class="table table-hover">
     <tr>
-        <th>Class Code</th>
         <th>Section Number</th>
         <th>Section CRN</th>
         <th>Section Time</th>
@@ -21,7 +23,6 @@
     </tr>
     {% for cl in classes %}
     <tr>
-        <td>{{ cl.code }}</td>
         <td>{{ cl.number }}</td>
         <td>{{ cl.crn }}</td>
         <td>{{ cl.class_time }}</td>

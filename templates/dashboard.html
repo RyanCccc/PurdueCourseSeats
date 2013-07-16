@@ -3,7 +3,7 @@
 {% block active_sub %}active{% endblock %}
 {% block tab_title %}Subscribed Sections{% endblock %}
 {% block main_table %}
-<table>
+<table class="table table-hover">
     <tr>
         <th>CRN</th>
         <th>Class Name</th>
@@ -31,7 +31,7 @@
             <form id="remove_crn" action="{% url 'user_mode_remove_crn' %}" method="POST" style="margin:0">
                 {% csrf_token %}
                 <input type="hidden" name="crn" value="{{ sec.crn }}">
-                <input type="submit" value="Remove">
+                <input class="btn" type="submit" value="Remove">
             </form>
         </td>
     </tr>

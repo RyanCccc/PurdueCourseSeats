@@ -3,14 +3,13 @@ import xml.etree.ElementTree as ET
 import re
 
 from seats_check.util import * 
-from lib.weChat.client import Client
 
 test_str_1 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[CS180]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[10001]]></Content><MsgId>1234567890123456</MsgId></xml>"
 test_str_2 = "<xml><ToUserName><![CDATA[ryanc]]></ToUserName><FromUserName><![CDATA[shabi]]></FromUserName><CreateTime>1348831860</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[engl106]]></Content><MsgId>1234567890123456</MsgId></xml>"
 
 
-def parse_xml(in_str):
+def parse_xml(in_str, timeout=None):
     root = ET.fromstring(in_str) 
     msg = ''
     content =  root.find('Content').text
@@ -29,7 +28,7 @@ def parse_xml(in_str):
         try:
             max_num, curr_num, name, code, number = get_all(crn, term_code)
             rem_num = int(max_num) - int(curr_num)
-            msg = '您订阅的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d' % (
+            msg = '您的课 %s ,课号 %s, Section Number是%s, CRN为%s, 一共有%d个位置, 现在还剩下%d个' % (
                     name.encode('iso-8859-2'), 
                     code.encode('iso-8859-2'),
                     number.encode('iso-8859-2'), 
@@ -51,7 +50,10 @@ def parse_xml(in_str):
             term = result[1]
         term_code = convert_term_to_code(term)
         try:
-            searches = get_all_secs_by_class(sub, cnbr, term_code, 3.2)
+            if timeout:
+                searches = get_all_secs_by_class(sub, cnbr, term_code, timeout)
+            else:
+                searches = get_all_secs_by_class(sub, cnbr, term_code, 3.2)
         except ParserException as e:
             msg = e.message
             if 'timed' in e.message:

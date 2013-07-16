@@ -17,8 +17,8 @@ from seats_check import util
 def update_periodic():
     secs = Section.objects.all()
     count = len(secs)
-    for i in range(0, count, 20):
-        process_secs = secs[i:i+20]
+    for i in range(0, count, 30):
+        process_secs = secs[i:i+30]
         update_secs.delay(process_secs)
 
 @task
@@ -31,7 +31,6 @@ def update_secs(secs):
         sec.current_seats_num = curr_num
         sec.remain_seats_num = rem_num
         sec.save()
-        msg = 'Your subscribed class %s, class code is %s, class number is %s, section number is %s, maximun seats %s, there are %s seats left' % (name, code, number, sec.crn, max_num, rem_num)
         if seats_change > 0:
             msg = 'Wow! your class %s has new seats released!!\n Remain seats change from %s to %s' % (
                       sec.crn, 

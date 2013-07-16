@@ -165,5 +165,47 @@ def remove_crn(request):
     return redirect('user_mode_dashboard')
 
 def profile(request):
-    context = None
-    return render(request, 'profile.html', context)
+    user = request.user
+    context = {
+        'user' : user,
+        'error' : '',
+    }
+    if request.method == 'GET':
+        return render(request, 'profile.html', context)
+    elif request.method == 'POST':
+        param = request.POST
+        firstname = param.get('firstname')
+        lastname= param.get('lastname')
+        email = param.get('email')
+        if not firstname or not lastname: 
+            context['error'] = 'Please fill out your name'
+            return render(
+                request,'profile.html', 
+                context
+            )
+        if not email:
+            context['error'] = 'Please fill out your email'
+            return render(
+                request,'profile.html', 
+                context
+            )
+        try:
+            validate_email(email)
+        except ValidationError:
+            context['error'] = 'Please use correct email'
+            return render(
+                request,'profile.html', 
+                context
+            )
+        if User.objects.filter(email = email).exists() and user.email != email:
+            context['error'] = 'Email exists'
+            return render(
+                request,'profile.html', 
+                context
+            )
+        user.first_name = firstname
+        user.last_name = lastname
+        user.email = email
+        print firstname, lastname, email
+        user.save()
+        return render(request, 'profile.html', context)

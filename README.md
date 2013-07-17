@@ -26,7 +26,7 @@ Feature
 - This server will update the latest information from Purdue website every 20 seconds
 - **Only the classes that have already in the database will be updated** , which will save space and time
 - Once new class which is not in database get queried, the new class information will be stored in database, so that it will be updated periodically
-- The url for seats check is on <http://purdue-class.chenrendong.com/seats_check/> + `Class CRN`
+- The API for seats check is on <http://purdue-class.chenrendong.com/seats_check/>
 - Once hit the url, the server will check if the database has that class data already, if not, then parser from Purdue website and store it into database
 - Create an account and subscribe your desired CRN here
 - Server will update the seats every 20 seconds

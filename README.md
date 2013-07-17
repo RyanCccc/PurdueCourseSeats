@@ -6,7 +6,8 @@ PurdueCourseSeats
 Important Notice
 =================
 
-**Null**
+Backend start to run
+Stable version released
 
 
 Introduction
@@ -58,11 +59,3 @@ API
   * code is the flag, 0 represents as failed, 1 represnts as successful
   * If code is 0, then content is a string containing the error message
   * If code is 1, then centent is a tuple containing all the class information
-
-
-TODO
-----
-
-- Muti-platform software
-- Remove the class which hasn't been queried for a long time
-- See issues

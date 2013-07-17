@@ -64,7 +64,10 @@
                   <p>Keep tracking available class seats in real time</p>
                   <p>Update the latest seats in <b>every 60 seconds</b></p>
                   {% if not request.user.is_authenticated %}
-                    <p><a href="{% url 'user_mode_register' %}" class="btn btn-primary btn-large">Sign up »</a></p>
+                  <p>
+                    <a href="{% url 'user_mode_register' %}" class="btn btn-large">Register Now »</a>
+                    <a href="{% url 'user_mode_login' %}" class="btn btn-inverse btn-large">Sign In »</a>
+                  </p>
                   {% else %}
                     <p><a href="{% url 'user_mode_dashboard' %}" class="btn btn-primary btn-large">My Dashboard »</a></p>
                   {% endif %}

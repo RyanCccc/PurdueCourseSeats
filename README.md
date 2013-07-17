@@ -6,8 +6,8 @@ PurdueCourseSeats
 Important Notice
 =================
 
-Backend start to run
-Stable version released
+- Backend start to run
+- Stable version released
 
 
 Introduction

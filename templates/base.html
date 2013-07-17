@@ -78,7 +78,7 @@
                 <li class="dropdown">
                     <a href= "#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{ request.user.get_full_name }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'not_completed' %}">Profile</a></li>
+                        <li><a href="{% url 'user_mode_profile' %}">Profile</a></li>
                         <li><a href="{% url 'user_mode_logout' %}">Log Out</a></li>
                     </ul>
                 </li>

@@ -40,7 +40,7 @@
 </table>
 {% endblock %}
 {% block form %}
-<form id="add_sec" class="form-inline" name="addsec" action="." method="POST">{% csrf_token %}
+<form id="add_sec" class="form-inline add-btn" name="addsec" action="." method="POST">{% csrf_token %}
     <div>{{ error }}</div>
     <label>Add CRN:</label><input class="input-small" type="text" name="crn" placeholder="Section CRN">
     <label>Term: </label><input class="input-small" type="text" name="term" value="Fall 2013">

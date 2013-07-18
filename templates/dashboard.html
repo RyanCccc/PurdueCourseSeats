@@ -31,6 +31,7 @@
             <form id="remove_crn" action="{% url 'user_mode_remove_crn' %}" method="POST" style="margin:0">
                 {% csrf_token %}
                 <input type="hidden" name="crn" value="{{ sec.crn }}">
+                <input type="hidden" name="term" value="{{ sec.term }}">
                 <input class="btn" type="submit" value="Remove">
             </form>
         </td>
@@ -39,7 +40,7 @@
 </table>
 {% endblock %}
 {% block form %}
-<form id="add_sec" class="form-inline" name="addsec" action="." method="POST">{% csrf_token %}
+<form id="add_sec" class="form-inline add-btn" name="addsec" action="." method="POST">{% csrf_token %}
     <div>{{ error }}</div>
     <label>Add CRN:</label><input class="input-small" type="text" name="crn" placeholder="Section CRN">
     <label>Term: </label><input class="input-small" type="text" name="term" value="Fall 2013">

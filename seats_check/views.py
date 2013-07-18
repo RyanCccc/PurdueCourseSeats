@@ -17,11 +17,9 @@ def seats_check(request, class_crn = None):
     if request.method == 'GET':
         term = request.GET.get('term') or settings.CURRENT_TERM
         try:
-            sec = Section.objects.get(crn = class_crn, term = term) 
+            sec = Section.objects.get(crn = class_crn, term = term)
         except:
             exists = False
-
-        exists = True
         
         if not exists: 
             try:

@@ -157,9 +157,8 @@ def crn_search(request):
 @login_required
 def remove_crn(request):
     crn = request.POST.get('crn')
-    # TODO
-    # Add term
-    sec = Section.objects.get(crn=crn)
+    term = request.POST.get('term')
+    sec = Section.objects.get(crn=crn, term=term)
     user = request.user
     myuser = user.myuser
     myuser.sections.remove(sec)

@@ -2,7 +2,11 @@ html, body {
     height:100%; 
     background:#4E5359 url(../images/bg_universal.png) repeat 0 0;
     color:#666; 
-    min-width:940px;
+    min-width:1070px;
+}
+
+.navbar .container,.container {
+    width:1070px;
 }
 
 table td {

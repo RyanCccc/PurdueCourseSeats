@@ -24,3 +24,24 @@ td, th {
     height: 50px;
     background-color: #FFF;
 }
+
+.if-btn-group {
+    position: fixed;
+    right: 0px;
+    bottom: 40%;
+    border: 0px;
+    text-align: right;
+}
+
+.if-btn {
+    margin-bottom: 20px;
+}
+
+.iframe {
+    position: fixed;
+    left: 100%;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    z-index: 1044;
+}

@@ -80,6 +80,7 @@ def login(request):
                     )
         return respond
 
+@login_required
 def logout(request):
     _logout(request)
     return redirect('home')
@@ -126,6 +127,7 @@ def register(request):
     else:
         return render(request,'register.html', {'error':''})
 
+@login_required
 def crn_search(request):
     if request.method == 'GET':
         context = None
@@ -152,6 +154,7 @@ def crn_search(request):
             context = {'error': 'Please use right class name'}
     return render(request, 'crn_search.html', context)
 
+@login_required
 def remove_crn(request):
     crn = request.POST.get('crn')
     # TODO
@@ -164,6 +167,7 @@ def remove_crn(request):
         Section.delete(sec)
     return redirect('user_mode_dashboard')
 
+@login_required
 def profile(request):
     user = request.user
     context = {

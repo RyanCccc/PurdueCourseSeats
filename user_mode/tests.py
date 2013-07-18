@@ -24,7 +24,8 @@ class SimpleTest(TestCase):
         resp = c.post(reverse('user_mode_login'),
                 {'username':'test','password':'123456'}, follow=True)
         self.assertContains(resp, 'id="add_sec"')
-        resp = c.post(reverse('user_mode_remove_crn'), {'crn':'10001'}, follow=True)
+        resp = c.post(reverse('user_mode_remove_crn'), {'crn':'10001',
+            'term':'201410'}, follow=True)
         self.assertNotContains(resp, 'Aeromechanics')
         sec_num = len(Section.objects.filter(crn='10001'))
         self.assertEqual(sec_num, 0)

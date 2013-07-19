@@ -1,9 +1,13 @@
 shown = false;
 $(function(){
     $(".if-btn").click(function(){
+        $iframe = $('#'+$(this).attr('for'));
+        if (! $iframe.attr('src')){
+            $iframe.attr('src', $(this).attr('src'));
+        }
         if (!shown){
             $(document).on('click','body', hideIFrame);
-            showIFrame($('#'+$(this).attr('for')));
+            showIFrame($iframe);
         }else{
             $(document).off('click','body', hideIFrame);
             hideIFrame();
@@ -13,7 +17,6 @@ $(function(){
 });
 
 function showIFrame(obj){
-    console.log(obj);
     obj.animate({'left':'10%'}, 400);
     shown=true;
 }

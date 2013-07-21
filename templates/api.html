@@ -14,16 +14,16 @@
     </h1></legend>
 
     <div>
-        <div class="alert alert-info">URL: http://purdue-class.chenrendong.com/seats_check/</div>
+        <div class="alert alert-info">URL: http://purdue-class.chenrendong.com/seats_check/crns/</div>
         <ul>
             <li>
                 <div class="info"><b>POST</b> to API URL with following format:</div>
                 <ul>
                     <li>
-                        <div class="info">[{term:term},{content:[*crns]}]</div>
+                        <div class="info">{term:term,content:[*crns]}</div>
                     </li>
                     <li>
-                        <div class="info">Example: [{term:201410},{content:[10001,10002,10003]}]</div>
+                    <div class="info">Example: {"term":"201410","content":["10001","10002"]}</div>
                     </li>
                 </ul>
             </li>

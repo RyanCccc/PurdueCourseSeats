@@ -25,6 +25,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
+                <input type="hidden" name="next" value="{{ next }}" />
                 <input class='btn' type="submit" value="Login">
                 <a class='btn' href="{% url 'user_mode_register' %}">Register</a>
             </div>

@@ -64,15 +64,23 @@ def dashboard(request):
 @guest_required
 def login(request):
     if request.method == 'GET':
-        return render(request,'login.html', {'error':''})
+        context = {
+            'next': request.GET.get('next'),      
+            'error':'',
+        }
+        return render(request,'login.html', context)
     elif request.method == 'POST':
         param = request.POST
         username = param.get('username')
         password = param.get('password')
+        next_ = param.get('next')
         user = authenticate(username=username, password=password)
         if user is not None:
             _login(request, user)
-            respond = redirect('user_mode_dashboard')
+            if next_:
+                respond = redirect(next_)
+            else:
+                respond = redirect('user_mode_dashboard')
         else:
             return render(
                         request,'login.html', 

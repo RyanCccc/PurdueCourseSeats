@@ -1,4 +1,6 @@
 from os import path
+import django.conf.global_settings as DEFAULT_SETTINGS
+
 PCS_DIR = path.abspath(path.dirname(__file__))
 PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
 
@@ -150,7 +152,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -158,6 +160,7 @@ INSTALLED_APPS = (
     'user_mode',
     'weixin',
     'djcelery',
+    'oauth2_provider',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -191,6 +194,14 @@ LOGGING = {
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.contrib.auth.context_processors.auth',
+)
+
+OAUTH2_PROVIDER = {
+
+}
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

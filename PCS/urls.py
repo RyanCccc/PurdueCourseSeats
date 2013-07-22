@@ -1,6 +1,6 @@
-import os
 from django.conf.urls import patterns, include, url
-from PCS import views, settings
+from django.contrib import admin
+from PCS import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -23,4 +23,6 @@ urlpatterns = patterns('',
     url(r'^not_completed$', views.not_completed, name='not_completed'),
     url(r'^api/$', views.api, name='api'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'^admin/', include(admin.site.urls)),
 )

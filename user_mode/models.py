@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.contrib.auth.models import User as Auth_User
 from seats_check.models import Section
 from seats_check.util import ParserException

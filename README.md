@@ -50,10 +50,10 @@ WeChat Support
 API
 -----
 
-*URL: `http://purdue-class.chenrendong.com/seats_check/`*
+*URL: `http://purdue-class.chenrendong.com/seats_check/crns/`*
 - `POST` to API URL with following format:
-  * `[{term:term},{content:[*crns]}]`
-  * Example: `[{term:201410},{content:[10001,10002,10003]}]`
+  * `{term:term,content:[*crns]}`
+  * Example: `{"term":"201410","content":["10001","10002"]}`
 - Server returns a list of results
 - The result of a single class is always a **JSON** containing `{code : 0/1 , content : String or Tuple}`
   * code is the flag, 0 represents as failed, 1 represnts as successful

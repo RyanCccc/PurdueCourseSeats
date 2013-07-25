@@ -1,6 +1,6 @@
 # Create your views here.
 import json
-from seats_check.util import get_all
+from seats_check.util import get_all, convert_term_to_code
 
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -16,6 +16,11 @@ def seats_check(request, class_crn = None):
     #GET
     if request.method == 'GET':
         term = request.GET.get('term', settings.CURRENT_TERM)
+        try:
+            term = convert_term_to_code(term)
+        except:
+            term = settings.CURRENT_TERM
+
         try:
             sec = Section.objects.get(crn = class_crn, term = term)
         except:
@@ -79,6 +84,6 @@ def seats_check(request, class_crn = None):
                     }
                 )
             except Exception as e:
-                result = json.dumps({'code' : 0, 'content': str(e)})
+                result += json.dumps({'code' : 0, 'content': str(e)})
 
     return HttpResponse(result, content_type="application/json")

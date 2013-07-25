@@ -53,7 +53,11 @@ def parse_xml(in_str, timeout=None):
                    'Valid format: "cs180 fa13", "cs240 12su"\n\n'
                    'Format of term keyword:\n'
                    'su 2012 / su2012 / 12su => Summer 2012\n'
-                   'fa2011 / 11 fa / fa11 => Fall 2011\n')
+                   'fa2011 / 11 fa / fa11 => Fall 2011\n\n'
+                   'If you have any questions, plz feel free to talk to me\n'
+                   'My weixin account: ryancccc\n'
+                   'My email: chenrd769@gmail.com\n'
+                   )
             re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
             return re_str
         sub = sub.upper()

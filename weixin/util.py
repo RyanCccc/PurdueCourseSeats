@@ -100,7 +100,7 @@ def parse_xml(in_str, timeout=None):
     return re_str
          
 def check_mode(in_str):
-    r = re.compile('^\d{5}')
+    r = re.compile('^\d{5}$')
     if r.match(in_str):
         return 0
     else:

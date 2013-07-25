@@ -7,6 +7,7 @@ $(function(){
         var term = $('#term-input').val();
         var url = "/seats_check/" + crn;
         term = encodeURIComponent(term)
+        $.ajaxSetup({async: false});
         $.get(url, {'term':term}, function(data){
             if(data['code'] == 0){
                 $('.result-error').text(data['content']);

@@ -60,9 +60,10 @@
                   </div>
               </div>
               <div class="description span6">
-                  <p>PCS parsers purdue class seats from Purdue Official Website</p>
+                  <p>Parsers purdue class seats from Purdue Website</p>
                   <p>Keep tracking available class seats in real time</p>
                   <p>Update the latest seats in <b>every 60 seconds</b></p>
+                  <p>Send email notification once new seats released</p>
                   {% if not request.user.is_authenticated %}
                   <p>
                     <a href="{% url 'user_mode_register' %}" class="btn btn-large">Register Now »</a>

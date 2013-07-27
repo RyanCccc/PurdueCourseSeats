@@ -39,8 +39,27 @@ def parse_xml(in_str, timeout=None):
         except:
             msg = "Sorry, the CRN %s is not available for term %s" % (crn, term)
     else:
-        result = content.split(' ')
-        sub, cnbr = convert_classname(result[0])
+        try:
+            result = content.split(' ')
+            sub, cnbr = convert_classname(result[0])
+        except:
+            msg = ('Sorry, the format you use is not correct.\n'
+                   'Please see the instruction here:\n'
+                   'To check CRN, use "subject"(case insensitive) followed by "class code" without space\n'
+                   'Valid format: "CS180", "cs18000"\n\n'
+                   'To check seats availability, use 5 digit number\n'
+                   'Valid format: "10001"\n\n'
+                   'To specify term, append your msg with a space followed by term keyword\n'
+                   'Valid format: "cs180 fa13", "cs240 12su"\n\n'
+                   'Format of term keyword:\n'
+                   'su 2012 / su2012 / 12su => Summer 2012\n'
+                   'fa2011 / 11 fa / fa11 => Fall 2011\n\n'
+                   'If you have any questions, plz feel free to talk to me\n'
+                   'My weixin account: ryancccc\n'
+                   'My email: chenrd769@gmail.com\n'
+                   )
+            re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
+            return re_str
         sub = sub.upper()
         if len(cnbr) < 5:
             cnbr += '00'
@@ -85,7 +104,7 @@ def parse_xml(in_str, timeout=None):
     return re_str
          
 def check_mode(in_str):
-    r = re.compile('^\d{5}')
+    r = re.compile('^\d{5}$')
     if r.match(in_str):
         return 0
     else:

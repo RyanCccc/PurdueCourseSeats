@@ -1,4 +1,9 @@
 {% extends "dashboard_base.html" %}
+{% load staticfiles %}
+
+{% block js_addition %}
+    <script type="text/javascript" src="{% static "js/subscribe.js" %}"></script>
+{% endblock %}
 
 {% block active_sub %}active{% endblock %}
 {% block tab_title %}Subscribed Sections{% endblock %}
@@ -40,12 +45,67 @@
 </table>
 {% endblock %}
 {% block form %}
-<form id="add_sec" class="form-inline add-btn" name="addsec" action="." method="POST">{% csrf_token %}
-    <div>{{ error }}</div>
-    <label>Add CRN:</label><input class="input-small" type="text" name="crn" placeholder="Section CRN">
-    <label>Term: </label><input class="input-small" type="text" name="term" value="Fall 2013">
-    <input class="btn" type="submit" value="Add Section">
+<form id="add-sec" class="form-inline add-btn" name="addsec" action="." method="POST">{% csrf_token %}
+    {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    <label>Add CRN:</label><input id="crn-input" class="input-small" type="text" name="crn" placeholder="Section CRN">
+    <label>Term: </label><input id="term-input" class="input-small" type="text" name="term" value="Fall 2013">
+    <button id="quick-search-btn" class="btn" type="button" href="#quick-search-modal" data-toggle="modal">Quick Search</button>
+    <input id="subscribe-btn" class="btn" type="submit" value="Subscribe Section">
 </form>
+
+<div id="quick-search-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Result</h3>
+    </div>
+    <div class="modal-body">
+        <div class="result-error alert-error"></div>
+        <div class="form-horizontal result">
+            <div class="control-group">
+                <label class="control-label" for="inputName">Class Name</label>
+                <div class="controls">
+                    <label id="inputName" class="control-label static-data"></label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputCode">Class Code</label>
+                <div class="controls">
+                    <label id="inputCode" class="control-label static-data"></label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputNum">Section Number</label>
+                <div class="controls">
+                    <label id="inputNum" class="control-label static-data"></label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputMax">Maximun Seats</label>
+                <div class="controls">
+                    <label id="inputMax" class="control-label static-data"></label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputCur">Active Seats</label>
+                <div class="controls">
+                    <label id="inputCur" class="control-label static-data"></label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputRem">Remain Seats</label>
+                <div class="controls">
+                    <label id="inputRem" class="control-label static-data"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="save" class="btn btn-primary">Subscribe it</button>
+    </div>
+</div>
 {% endblock %}
 
 {% block alert %}

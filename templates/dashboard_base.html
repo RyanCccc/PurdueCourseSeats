@@ -5,9 +5,9 @@
     <link href="{% static "css/dashboard.css" %}" rel="stylesheet">
 {% endblock %}
 {% block js %}
-    <script type="text/javascript">
-    </script>
     <script type="text/javascript" src="{% static "js/dashboard.js" %}"></script>
+    {% block js_addition %}
+    {% endblock %}
 {% endblock %}
 
 {% block active_dashboard %}class="active"{% endblock %}

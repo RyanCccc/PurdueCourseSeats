@@ -14,7 +14,7 @@ urlpatterns = patterns('seats_check.views',
 
     # Uncomment the next line to enable the admin:
     url(r'^(?P<class_crn>\w+)/$', 'seats_check', 
-        name = 'seats_check_seat_check'),
+        name = 'seats_check_seat_check_single'),
     url(r'^crns/$', 'seats_check', 
-        name = 'seats_check_seat_check'),
+        name = 'seats_check_seat_check_multi'),
 )

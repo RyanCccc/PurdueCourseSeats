@@ -79,6 +79,12 @@ def parse_xml(in_str, timeout=None):
                 msg = 'The content is too large to display!'
             re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
             return re_str
+        except Exception as e:
+            msg = ('Cannot find this class, maybe check your spell and format '
+                   'and try again?')
+            re_str = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content><FuncFlag>0</FuncFlag></xml>" % (tousername, fromusername, createtime, msg)
+            return re_str
+            
         searches = sorted(searches, key = lambda cl: cl['class_time'].start_time)
         msg = '课的名称: \n%s \n有以下这些CRN: \n' % (
             searches[0].get('name').encode('iso-8859-2')

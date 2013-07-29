@@ -37,6 +37,9 @@ def update_secs(secs):
                       str(rem_num - seats_change),
                       str(rem_num)
                    )
+            msg += ('\n\n Once you don\'t need this section any more, '
+                    'you can log in purdue-class.chenrendong.com to remove this'
+                    ' section.')
             users = sec.myuser_set.all()
             emails = [user.user.email for user in users]
             send_email.delay(emails, msg)

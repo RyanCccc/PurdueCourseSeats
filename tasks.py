@@ -26,6 +26,7 @@ def update_secs(secs):
     for sec in secs:
         max_num, curr_num, name, code, number = util.get_all(sec.crn, sec.term)
         rem_num = max_num - curr_num
+        old_remain = sec.remain_seats_num
         seats_change = rem_num - sec.remain_seats_num
         sec.max_seats_num = max_num
         sec.current_seats_num = curr_num
@@ -34,15 +35,20 @@ def update_secs(secs):
         if seats_change > 0:
             msg = 'Wow! your class %s has new seats released!!\n Remain seats change from %s to %s' % (
                       sec.crn, 
-                      str(rem_num - seats_change),
+                      str(old_remain),
                       str(rem_num)
                    )
             msg += ('\n\n Once you don\'t need this section any more, '
                     'you can log in purdue-class.chenrendong.com to remove this'
                     ' section.')
             users = sec.myuser_set.all()
-            emails = [user.user.email for user in users]
-            send_email.delay(emails, msg)
+            restricts = sec.send_restrict.all()
+            if not old_remain:
+                emails = [user.user.email for user in users]
+            else:
+                emails = [user.user.email for user in users if user not in restricts]
+            if emails:
+                send_email.delay(emails, msg)
         elif seats_change < 0:
             msg = 'Sorry!!! You class\n %s \nSeats are decreasing!!\n' % sec.crn
             msg += 'Remain seats change from %s to %s' % (

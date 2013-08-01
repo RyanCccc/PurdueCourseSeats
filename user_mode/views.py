@@ -38,6 +38,7 @@ def dashboard(request):
         param = request.POST
         crn = param.get('crn')
         term = param.get('term')
+        restrict = param.get('send_restrict')
         if not term:
             term = settings.CURRENT_TERM
         else:
@@ -48,7 +49,7 @@ def dashboard(request):
             'error' : '',
         }
         try:
-            sec = my_user.add_section(crn, term)
+            sec = my_user.add_section(crn, term, restrict)
             if sec:
                 msg = "You successfully subscribe section:%s \n" % sec
                 try:

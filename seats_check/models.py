@@ -17,7 +17,6 @@ class SectionManager(models.Manager):
         name,
         code,
         number,
-        send_restrict=False,
     ):
         sec = self.create(
                 crn=crn,
@@ -28,11 +27,10 @@ class SectionManager(models.Manager):
                 name=name,
                 code=code,
                 number=number,
-                send_restrict=send_restrict,
                 )
         return sec
 
-    def create_new_section(self, crn, term, send_restrict=False):
+    def create_new_section(self, crn, term):
         try:
             max_num, curr_num, name, code, number = get_all(crn, term)
             return self.create_section(
@@ -43,7 +41,6 @@ class SectionManager(models.Manager):
                         name,
                         code,
                         number,
-                        send_restrict=send_restrict,
                     )
         except ParserException as e:
             return e
@@ -57,8 +54,14 @@ class Section(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=20)
     number = models.CharField(max_length=20)
-    send_restrict = models.BooleanField(default=False)
+    send_restrict = models.ManyToManyField(
+        'user_mode.MyUser',
+        related_name='restrict_sections'
+    )
     objects = SectionManager()
+
+    def add_restrict_user(self, user):
+        self.send_restrict.add(user)
 
     def get_term(self):
         return convert_code_to_term(self.term)

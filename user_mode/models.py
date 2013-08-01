@@ -33,7 +33,7 @@ class MyUser(models.Model):
     pwd = models.CharField(max_length=100)
     sections = models.ManyToManyField(Section)
 
-    def add_section(self, crn, term):
+    def add_section(self, crn, term, send_restrict=False):
         if self.sections.count() < 5:
             sec = None
             try:
@@ -43,6 +43,8 @@ class MyUser(models.Model):
             if not isinstance(sec, Exception):
                 if not sec in self.sections.all():
                     self.sections.add(sec)
+                    if send_restrict:
+                        sec.add_restrict_user(self)
                     return sec
             else:
                 raise sec

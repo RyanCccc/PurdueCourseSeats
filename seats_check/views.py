@@ -71,19 +71,42 @@ def seats_check(request, class_crn = None):
         result = []
         for crn in crns:
             try:
-                max_num, curr_num, name, code, number = get_all(crn, term)
+                sec = Section.objects.get(crn = class_crn, term = term)
+            except:
+                exists = False
+            if not exists:
+                try:
+                    max_num, curr_num, name, code, number = get_all(crn, term)
+                    result += json.dumps(
+                        {'code': 1,
+                            'content': {'max_num' : max_num,
+                                        'curr_num' : curr_num,
+                                        'rem_num' : (max_num - curr_num),
+                                        'name' : name,
+                                        'code' : code,
+                                        'number' : number,
+                                       }
+                        }
+                    )
+                except Exception as e:
+                    result += json.dumps({'code' : 0, 'content': str(e)})
+            else:
+                max_num = sec.max_seats_num
+                curr_num = sec.current_seats_num
+                rem_num = sec.remain_seats_num
+                name = sec.name
+                code = sec.code
+                number = sec.number
                 result += json.dumps(
                     {'code': 1,
                         'content': {'max_num' : max_num,
                                     'curr_num' : curr_num,
-                                    'rem_num' : (max_num - curr_num),
+                                    'rem_num' : rem_num,
                                     'name' : name,
                                     'code' : code,
                                     'number' : number,
                                    }
                     }
                 )
-            except Exception as e:
-                result += json.dumps({'code' : 0, 'content': str(e)})
 
     return HttpResponse(result, content_type="application/json")

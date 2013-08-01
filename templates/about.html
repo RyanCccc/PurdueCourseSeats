@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static "css/contact.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block active_contact %}class="active"{% endblock %}
+
+{% block content %}
+<div class="unit">
+    <legend><h1 class="pull-center">
+            API
+    </h1></legend>
+    <div class="row-fliud">
+        <div class="span6 info-bloc">
+            <p>RenRen Account</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

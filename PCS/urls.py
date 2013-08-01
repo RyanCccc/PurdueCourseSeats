@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^weixin/', include('weixin.urls')),
     url(r'^not_completed$', views.not_completed, name='not_completed'),
     url(r'^api/$', views.api, name='api'),
+    url(r'^contact/$', views.contact, name='contact'),
 )

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static "css/contact.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block active_contact %}class="active"{% endblock %}
+
+{% block content %}
+<div class="unit">
+    <legend><h1 class="pull-center">
+            Contact Information
+    </h1></legend>
+    <div class="row-fluid">
+        <div class="span6 info-bloc">
+            <h3 class="info-label">RenRen Account:</h3>
+            <h3 class="info-label">Weibo Account:</h3>
+            <h3 class="info-label">WeChat Account:</h3>
+            <h3 class="info-label">Email Address:</h3>
+            <h3 class="info-label">QQ:</h3>
+        </div>
+        <div class="span6 info-bloc">
+            <h3 class="info-label"><a href="http://www.renren.com/247605993">Rendong Chen</a></h3>
+            <h3 class="info-label"><a href="http://weibo.com/u/2234534512">RyanCccc</a></h3>
+            <h3 class="info-label">BoilerUp_PCS</h3>
+            <h3 class="info-label"><a href="mailto:chenrd769@gmail.com">chenrd769@gmail.com</a></h3>
+            <h3 class="info-label"><a href="http://wpa.qq.com/msgrd?V=0&amp;Uin=799080508&amp;Site=http://purdue-class.chenrendong.com/contact/&amp;Menu=yes" target="_blank">799080508</a></h3>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -12,3 +12,7 @@ def api(request):
 def not_completed(request):
     context = None
     return render(request, 'notcompleted.html', context)
+
+def contact(request):
+    context = None
+    return render(request, 'contact.html', context)

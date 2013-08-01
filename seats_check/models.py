@@ -8,19 +8,31 @@ from seats_check.util import (
 
 # Create your models here.
 class SectionManager(models.Manager):
-    def create_section(self, crn, max_num, curr_num, term, name, code, number):
+    def create_section(
+        self,
+        crn,
+        max_num,
+        curr_num,
+        term,
+        name,
+        code,
+        number,
+        send_restrict=False,
+    ):
         sec = self.create(
-                crn = crn, 
-                max_seats_num = max_num, 
-                current_seats_num = curr_num,
-                remain_seats_num = (max_num - curr_num),
-                term = term,
-                name = name,
-                code = code,
-                number = number)
+                crn=crn,
+                max_seats_num=max_num, 
+                current_seats_num=curr_num,
+                remain_seats_num=(max_num - curr_num),
+                term=term,
+                name=name,
+                code=code,
+                number=number,
+                send_restrict=send_restrict,
+                )
         return sec
 
-    def create_new_section(self, crn, term):
+    def create_new_section(self, crn, term, send_restrict=False):
         try:
             max_num, curr_num, name, code, number = get_all(crn, term)
             return self.create_section(
@@ -30,7 +42,8 @@ class SectionManager(models.Manager):
                         term,
                         name,
                         code,
-                        number
+                        number,
+                        send_restrict=send_restrict,
                     )
         except ParserException as e:
             return e
@@ -44,6 +57,7 @@ class Section(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=20)
     number = models.CharField(max_length=20)
+    send_restrict = models.BooleanField(default=False)
     objects = SectionManager()
 
     def get_term(self):

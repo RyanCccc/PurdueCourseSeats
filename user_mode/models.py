@@ -13,7 +13,6 @@ class MyUserManager(models.Manager):
         password,
         firstname,
         lastname,
-        send_restrict=False
     ):
         user = Auth_User.objects.create_user(
             username,
@@ -25,7 +24,6 @@ class MyUserManager(models.Manager):
         my_user = self.create(
             user=user,
             pwd=password,
-            send_restrict=send_restrict,
         )
         return my_user
 
@@ -34,7 +32,6 @@ class MyUser(models.Model):
     user = models.OneToOneField(Auth_User, primary_key=True)
     pwd = models.CharField(max_length=100)
     sections = models.ManyToManyField(Section)
-    send_restrict = models.BooleanField(default=False)
 
     def add_section(self, crn, term):
         if self.sections.count() < 5:

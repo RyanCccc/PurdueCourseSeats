@@ -55,7 +55,7 @@
     </div>
     <div class="checkbox">
         <label>
-            <input id="send-restrict-checkbox" type="checkbox" value="restrict">Send notifictions only when seats changed from empty.
+            <input class="send-restrict-checkbox" type="checkbox" value="restrict">Send notifictions only when seats changed from empty.
         </label>
     </div>
     <div>
@@ -111,8 +111,15 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button id="save" class="btn btn-primary">Subscribe it</button>
+        <div class="checkbox pull-left">
+            <label>
+                <input class="send-restrict-checkbox" type="checkbox" value="restrict">Send notifictions only when seats changed from empty.
+            </label>
+        </div>
+        <div class="pull-right">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button id="save" class="btn btn-primary ">Subscribe it</button>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
+    'south',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'seats_check',
@@ -201,3 +202,7 @@ EMAIL_PORT = 587
 FIXTURE_DIRS = (
     path.join(PROJECT_DIR, 'fixtures'),
 )
+
+SOUTH_MIGRATION_MODULES = {
+    'djcelery': 'ignore',
+}

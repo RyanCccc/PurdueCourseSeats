@@ -6,30 +6,41 @@ from seats_check.util import ParserException
 
 
 class MyUserManager(models.Manager):
-    def create_user(self, username, email, password, firstname, lastname):
+    def create_user(
+        self,
+        username,
+        email,
+        password,
+        firstname,
+        lastname,
+        send_restrict=False
+    ):
         user = Auth_User.objects.create_user(
-                username, 
-                email,
-                password,
-                first_name = firstname,
-                last_name = lastname
-                )
+            username,
+            email,
+            password,
+            first_name=firstname,
+            last_name=lastname,
+        )
         my_user = self.create(
-            user = user,
-            pwd = password
+            user=user,
+            pwd=password,
+            send_restrict=send_restrict,
         )
         return my_user
+
 
 class MyUser(models.Model):
     user = models.OneToOneField(Auth_User, primary_key=True)
     pwd = models.CharField(max_length=100)
     sections = models.ManyToManyField(Section)
+    send_restrict = models.BooleanField(default=False)
 
     def add_section(self, crn, term):
         if self.sections.count() < 5:
             sec = None
             try:
-                sec = Section.objects.get(crn = crn, term = term)
+                sec = Section.objects.get(crn=crn, term=term)
             except:
                 sec = Section.objects.create_new_section(crn, term)
             if not isinstance(sec, Exception):
@@ -37,7 +48,6 @@ class MyUser(models.Model):
                     self.sections.add(sec)
                     return sec
             else:
-                err = sec
                 raise sec
             return None
         else:

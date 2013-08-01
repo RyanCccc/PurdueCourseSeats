@@ -49,10 +49,19 @@
     {% if error %}
         <div class="alert alert-error">{{ error }}</div>
     {% endif %}
-    <label>Add CRN:</label><input id="crn-input" class="input-small" type="text" name="crn" placeholder="Section CRN">
-    <label>Term: </label><input id="term-input" class="input-small" type="text" name="term" value="Fall 2013">
-    <button id="quick-search-btn" class="btn" type="button" href="#quick-search-modal" data-toggle="modal">Quick Search</button>
-    <input id="subscribe-btn" class="btn" type="submit" value="Subscribe Section">
+    <div>
+        <label>Add CRN:</label><input id="crn-input" class="input-small" type="text" name="crn" placeholder="Section CRN">
+        <label>Term: </label><input id="term-input" class="input-small" type="text" name="term" value="Fall 2013">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input id="send-restrict-checkbox" type="checkbox" value="restrict">Send notifictions only when seats changed from empty.
+        </label>
+    </div>
+    <div>
+        <button id="quick-search-btn" class="btn" type="button" href="#quick-search-modal" data-toggle="modal">Quick Search</button>
+        <input id="subscribe-btn" class="btn" type="submit" value="Subscribe Section">
+    </div>
 </form>
 
 <div id="quick-search-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">

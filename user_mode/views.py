@@ -78,7 +78,7 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             _login(request, user)
-            if next_:
+            if next_!='None':
                 respond = redirect(next_)
             else:
                 respond = redirect('user_mode_dashboard')

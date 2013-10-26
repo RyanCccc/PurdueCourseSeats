@@ -1,9 +1,10 @@
 from os import path
 PCS_DIR = path.abspath(path.dirname(__file__))
 PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
+PRODUCT_MODE = '/srv/project' in PROJECT_DIR:
 
 # Django settings for PCS project.
-if '/srv/project' in PROJECT_DIR:
+if PRODUCT_MODE:
     DEBUG = False
 else:
     DEBUG = True
@@ -30,10 +31,10 @@ from deploy import get_secret
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'my_dev',                      # Or path to database file if using sqlite3.
+        'NAME': 'product' if PRODUCT_MODE else 'my_dev',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'chen769',
-        'PASSWORD': get_secret.get_password(),
+        'PASSWORD': get_secret.get_password(PRODUCT_MODE),
         'HOST': 'mydb.cbehtrcqce74.us-west-2.rds.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '3306',                      # Set to empty string for default.
     }

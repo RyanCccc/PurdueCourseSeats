@@ -26,15 +26,16 @@ BROKER_URL = 'redis://localhost:6379/0'
 # Let Celery workers import our tasks module
 CELERY_IMPORTS = ("tasks", )
 
+from deploy import get_secret
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'my_dev',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'USER': 'chen769',
+        'PASSWORD': get_secret.get_password(),
+        'HOST': 'mydb.cbehtrcqce74.us-west-2.rds.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '3306',                      # Set to empty string for default.
     }
 }
 

@@ -1,7 +1,7 @@
 from os import path
 PCS_DIR = path.abspath(path.dirname(__file__))
 PROJECT_DIR = path.abspath(path.join(PCS_DIR, '..'))
-PRODUCT_MODE = '/srv/project' in PROJECT_DIR:
+PRODUCT_MODE = '/srv/project' in PROJECT_DIR
 
 # Django settings for PCS project.
 if PRODUCT_MODE:

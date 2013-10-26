@@ -34,7 +34,7 @@ DATABASES = {
         'NAME': 'product' if PRODUCT_MODE else 'my_dev',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'chen769',
-        'PASSWORD': get_secret.get_password(PRODUCT_MODE),
+        'PASSWORD': get_secret.get_password(),
         'HOST': 'mydb.cbehtrcqce74.us-west-2.rds.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '3306',                      # Set to empty string for default.
     }

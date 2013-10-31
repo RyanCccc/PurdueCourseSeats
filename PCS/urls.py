@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^not_completed$', views.not_completed, name='not_completed'),
     url(r'^api/$', views.api, name='api'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^used_book/', include('used_book.urls')),
 )

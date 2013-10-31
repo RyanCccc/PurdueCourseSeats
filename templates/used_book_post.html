@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="unit">
+    <legend><h1>Post Used Book</h1></legend>
+    <form class="form-horizontal" name="used_book_post" action="." method="POST">{% csrf_token %}
+        {% if error %}
+            <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+        <div class="control-group">
+            <label class="control-label" for="inputBookName">
+                Book Name: 
+            </label>
+            <div class="controls">
+                <input id="inputBookName" type="text" name="name">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPublisher">
+                Publisher: 
+            </label>
+            <div class="controls">
+                <input id="inputPublisher" type="text" name="publisher">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputCourse">
+                Course: 
+            </label>
+            <div class="controls">
+                <input id="inputCourse" type="text" name="course">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPrice">
+                Price:
+            </label>
+            <div class="controls">
+                <input id="inputPrice" type="text" name="price">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputSellerId">
+                Seller ID:
+            </label>
+            <div class="controls">
+                <input id="inputSellerId" type="text" name="seller_id">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputSellerContact">
+                Seller Contact:
+            </label>
+            <div class="controls">
+                <input id="inputSellerContact" type="text" name="seller_contact">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input class='btn' type="submit" value="Post">
+                <a style='margin-left:10px' class='btn' href="{% url 'used_book_view' %}">Back to View Books</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

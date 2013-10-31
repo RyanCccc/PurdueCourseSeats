@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'seats_check',
     'user_mode',
     'weixin',
+    'used_book',
     'djcelery',
 )
 

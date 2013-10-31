@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static "css/used_book.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="unit">
+    <legend><h1 class="pull-center">
+           Used Book 
+    </h1></legend>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Book Name</th>
+            <th>Publisher</th>
+            <th>Course</th>
+            <th>Price</th>
+            <th>Seller ID</th>
+            <th>Seller Contact</th>
+            <th>Action</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.name }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>{{ book.course }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.seller_id }}</td>
+            <td>{{ book.seller_contact }}</td>
+            <td>
+                <form id="remove_book" action="{% url 'used_book_view' %}" method="POST" style="margin:0">
+                    {% csrf_token %}
+                    <input type="hidden" name="pk" value="{{ book.pk }}">
+                    <input class="btn" type="submit" value="Remove">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class='pull-center'>
+        <a class='btn' href="{% url 'used_book_post' %}">Post My Book</a>
+    </div>
+</div>
+{% endblock %}

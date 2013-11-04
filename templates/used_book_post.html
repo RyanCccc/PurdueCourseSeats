@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="unit">
-    <legend><h1>Post Used Book</h1></legend>
+    <legend><h1>发布新信息</h1></legend>
     <form class="form-horizontal" name="used_book_post" action="." method="POST">{% csrf_token %}
         {% if error %}
             <div class="alert alert-error">{{ error }}</div>
         {% endif %}
         <div class="control-group">
             <label class="control-label" for="inputBookName">
-                Book Name: 
+                书名:
             </label>
             <div class="controls">
                 <input id="inputBookName" type="text" name="name">
@@ -17,7 +17,7 @@
         </div>
         <div class="control-group">
             <label class="control-label" for="inputPublisher">
-                Publisher: 
+                出版社：
             </label>
             <div class="controls">
                 <input id="inputPublisher" type="text" name="publisher">
@@ -25,7 +25,7 @@
         </div>
         <div class="control-group">
             <label class="control-label" for="inputCourse">
-                Course: 
+                课程：
             </label>
             <div class="controls">
                 <input id="inputCourse" type="text" name="course">
@@ -33,7 +33,7 @@
         </div>
         <div class="control-group">
             <label class="control-label" for="inputPrice">
-                Price:
+                价格：
             </label>
             <div class="controls">
                 <input id="inputPrice" type="text" name="price">
@@ -41,7 +41,7 @@
         </div>
         <div class="control-group">
             <label class="control-label" for="inputSellerId">
-                Seller ID:
+                来自（学号）：
             </label>
             <div class="controls">
                 <input id="inputSellerId" type="text" name="seller_id">
@@ -49,7 +49,7 @@
         </div>
         <div class="control-group">
             <label class="control-label" for="inputSellerContact">
-                Seller Contact:
+                电话（联系方式）：
             </label>
             <div class="controls">
                 <input id="inputSellerContact" type="text" name="seller_contact">
@@ -57,8 +57,8 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <input class='btn' type="submit" value="Post">
-                <a style='margin-left:10px' class='btn' href="{% url 'used_book_view' %}">Back to View Books</a>
+                <input class='btn' type="submit" value="发布">
+                <a style='margin-left:10px' class='btn' href="{% url 'used_book_view' %}">返回查看列表</a>
                 </div>
             </div>
         </div>

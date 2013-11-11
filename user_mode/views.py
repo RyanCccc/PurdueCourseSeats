@@ -222,4 +222,5 @@ def profile(request):
         if password:
             user.set_password(password)
         user.save()
+        context['msg'] = 'Successfully Saved Your Profile!!'
         return render(request, 'profile.html', context)

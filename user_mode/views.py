@@ -189,6 +189,7 @@ def profile(request):
         firstname = param.get('firstname')
         lastname= param.get('lastname')
         email = param.get('email')
+        password = param.get('password')
         if not firstname or not lastname: 
             context['error'] = 'Please fill out your name'
             return render(
@@ -218,6 +219,7 @@ def profile(request):
         user.first_name = firstname
         user.last_name = lastname
         user.email = email
-        print firstname, lastname, email
+        if password:
+            user.set_password(password)
         user.save()
         return render(request, 'profile.html', context)

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
-from user_mode.models import MyUser
+from user_mode.models import MyUser, Invitation
 from PCS import settings
 from seats_check.util import (
     ParserException,
@@ -106,6 +106,17 @@ def register(request):
         email = param.get('email')
         password = param.get('password')
         repassword = param.get('repassword')
+        invite_code = param.get('invitation')
+        if not invite_code:
+            return render(request,'register.html', {'error':'Please fill out the invitation code'})
+        try:
+            invitation = Invitation.objects.get(code=invite_code)
+            if invitation.used:
+                return render(request,'register.html', {'error':'Used invitation code'})
+            invitation.used = True
+            invitation.save()
+        except:
+            return render(request,'register.html', {'error':'Incorrect invitation code'})
         if not username or not firstname or not lastname: 
             return render(request,'register.html', {'error':'Please fill out all required fields'})
         if not email:

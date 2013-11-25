@@ -13,7 +13,7 @@ from django.core.mail import send_mail
 from seats_check.models import Section
 from seats_check import util
 
-@periodic_task(run_every=timedelta(seconds=60))
+@periodic_task(run_every=timedelta(seconds=300))
 def update_periodic():
     secs = Section.objects.all()
     count = len(secs)

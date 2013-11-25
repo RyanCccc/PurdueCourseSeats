@@ -70,3 +70,10 @@ class MyUser(models.Model):
         return result
 
     objects = MyUserManager()
+
+class Invitation(models.Model):
+    code = models.CharField(max_length=20)
+    used = models.BooleanField(default=False)
+
+    def add_invitation(self,code):
+        Invitation.objects.create(code=code)

@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 
+def banned(request):
+    context = None
+    return render(request, 'banned.html', context)
 
 def index(request):
     context = None

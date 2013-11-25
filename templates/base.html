@@ -39,6 +39,7 @@
 
   <body>
 
+      {% block nav %}
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -89,6 +90,7 @@
         </div>
       </div>
     </div>
+    {% endblock %}
 
     <div class="container">
     {% block content %}

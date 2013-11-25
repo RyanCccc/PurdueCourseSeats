@@ -16,7 +16,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.index, name='home'),
+    url(r'^$', views.banned, name='banned'),
+    url(r'^secret/$', views.index, name='home'),
     url(r'^seats_check/', include('seats_check.urls')),
     url(r'^accounts/', include('user_mode.urls')),
     url(r'^weixin/', include('weixin.urls')),
